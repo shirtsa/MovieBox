@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"><title>Add Productions</title></head>
+<body>
+<div class="header_section"
+     th:replace="~{fragments/navbar}">
+</div>
+<div class="production_page">
+    <div class="container">
+        <h2 class="text-center text-white">Add Production</h2>
+        <form th:method="post"
+              th:action="@{/production/add}"
+              th:object="${addProductionDTO}"
+              class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            <div class="row">
+                <!-- Production name -->
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold" th:for="name">Production Name</label>
+                    <input id="name"
+                           type="text"
+                           class="form-control"
+                           th:field="*{name}"
+                           errorclass="bg-danger"/>
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Production name is required.
+                    </p>
+                </div>
+                <!-- EO: Production name -->
+                <!-- Length -->
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-white font-weight-bold" th:for="length">Length</label>
+                    <input id="length"
+                           th:field="*{length}"
+                           errorclass="is-invalid"
+                           type="number"
+                           class="form-control"
+                           placeholder="Production length"/>
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Production length is required.
+                    </p>
+                </div>
+                <!-- EO: Length -->
+            </div>
+            <div class="row">
+                <!-- Production -->
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold" th:for="productionType">Production type</label>
+                    <select id="productionType"
+                            name="productionType"
+                            th:field="*{productionType}"
+                            errorclass="is-invalid"
+                            class="form-control">
+                        <option value="">- Select production type -</option>
+                        <option th:each="type : ${productionTypes}"
+                                th:text="${type}"
+                                th:value="${type}">
+                        </option>
+                    </select>
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Production type is required.
+                    </p>
+                </div>
+                <!-- EO: Production -->
+                <!-- Genre -->
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-center text-white font-weight-bold" th:for="genre">Genre</label>
+                    <select id="genre"
+                            th:field="*{genre}"
+                            errorclass="is-invalid"
+                            class="form-control">
+                        <option value="">- Select genre -</option>
+                        <option th:each="type : ${genreTypes}"
+                                th:text="${type}"
+                                th:value="${type}">
+                        </option>
+                    </select>
+                    <p class="invalid-feedback  errors alert alert-danger">
+                        Genre type is required.
+                    </p>
+                </div>
+                <!-- EO: Genre -->
+            </div>
+            <div class="row">
+                <!-- Rating -->
+                <div class="form-group col-md-6 mb-3">
+                    <label class="text-white font-weight-bold" th:for="rating">Rating</label>
+                    <input id="rating"
+                           th:field="*{rating}"
+                           errorclass="is-invalid"
+                           type="number"
+                           class="form-control"
+                           placeholder="Production rating"/>
+                    <!--                    <p if="${#fields.hasErrors('rating')}"-->
+                    <!--                       class="errors alert alert-danger"-->
+                    <!--                       errors="*{rating}">-->
+                    <!--                    </p>-->
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Select rating zero for default.
+                    </p>
+                </div>
+                <!-- EO: Rating -->
+            </div>
+            <!-- Image URL -->
+            <div class="form-group">
+                <label class="text-white font-weight-bold" th:for="imageUrl">Image URL</label>
+                <input id="imageUrl"
+                       th:field="*{imageUrl}"
+                       errorclass="is-invalid"
+                       type="url" class="form-control"
+                       placeholder="Put production image URL here">
+                <p class="invalid-feedback errors alert alert-danger">
+                    Production image URL is required.
+                </p>
+            </div>
+            <!-- EO: Image URL -->
+            <!-- Trailer URL -->
+            <div class="form-group">
+                <label class="text-white font-weight-bold" th:for="trailer">Trailer URL</label>
+                <input id="trailer"
+                       th:field="*{trailer}"
+                       errorclass="is-invalid"
+                       type="url" class="form-control"
+                       placeholder="Put production trailer URL here">
+                <p class="invalid-feedback errors alert alert-danger">
+                    Production trailer URL is required.
+                </p>
+            </div>
+            <!-- EO: Trailer URL -->
+            <div class="row">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <input type="submit" class="btn btn-info btn-lg" value="Submit Production"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- movies section end -->
+</body>
+<!-- copyright section start -->
+<div class="copyright_section"
+     th:replace="~{fragments/copyrights}">
+</div>
+<!-- copyright section end -->
+</html>

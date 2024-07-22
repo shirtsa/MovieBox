@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="footer" class="footer_section layout_padding">
+    <div class="container">
+        <div class="footer_menu">
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/movies}">Movies</a></li>
+                <li><a th:href="@{/tv}">TV</a></li>
+                <li><a th:href="@{/celebs}">Celebs</a></li>
+                <li><a href="#">News</a></li>
+            </ul>
+        </div>
+        <div class="social_icon">
+            <ul>
+                <li><a th:href="@{https://cdnph.upi.com/svc/sv/upi/9091495735450/2017/1/e5758f02decf53e7476d0e647506bb4b/Mark-Zuckerberg-Judi-Dench-receive-honorary-Harvard-degrees.jpg}"><img th:src="@{images/fb-icon.png}"></a></li>
+                <li><a th:href="@{https://ichef.bbci.co.uk/news/800/cpsprodpb/7727/production/_103330503_musk3.jpg.webp}"><img th:src="@{images/twitter-icon.png}"></a></li>
+                <li><a th:href="@{https://www.executivegrapevine.com/uploads/articles/Microsoft-buys-LinkedIn.jpg}"><img th:src="@{images/linkedin-icon.png}"></a></li>
+                <li><a th:href="@{https://qph.cf2.quoracdn.net/main-qimg-8b88c765aa9fdce78a3e466f8e894a1c-lq}"><img th:src="@{images/instagram-icon.png}"></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"><title>Register</title></head>
+<body>
+<div class="header_section"
+     th:replace="~{fragments/navbarlogin}">
+</div>
+<main class="registration_page">
+    <div class="registration-container">
+        <form class="mx-auto w-25 bg-blur rounded"
+              th:method="post"
+              th:action="@{/users/register}"
+              object="${userRegistrationDTO}">
+
+            <div class="form-group">
+                <div class="label-holder text-white textCol d-flex justify-content-center">
+                    <label for="email" class="h4 mb-2">Email</label>
+                </div>
+                <input type="email" class="form-control" id="email"
+                       field="*{email}"
+                       errorclass="bg-danger"/>
+                <small errors="*{email}">Email error message</small>
+            </div>
+
+            <div class="form-group">
+                <div class="label-holder textCol d-flex justify-content-center">
+                    <label for="firstName" class="h4 mb-2 text-white">First Name</label>
+                </div>
+                <input type="text" class="form-control" id="firstName"
+                       field="*{firstName}"
+                       errorclass="bg-danger"/>
+                <small errors="*{firstName}">First Name error message</small>
+            </div>
+
+            <div class="form-group">
+                <div class="label-holder textCol d-flex justify-content-center">
+                    <label for="lastName" class="h4 mb-2 text-white">Last Name</label>
+                </div>
+                <input type="text" class="form-control" id="lastName"
+                       field="*{lastName}"
+                       errorclass="bg-danger"/>
+                <small errors="*{LastName}">Last Name error message</small>
+            </div>
+
+            <div class="form-group">
+                <div class="label-holder text-white textCol d-flex justify-content-center">
+                    <label for="password" class="h4 mb-2">Password</label>
+                </div>
+                <input type="password" class="form-control" id="password"
+                       field="*{password}"
+                       errorclass="bg-danger"/>
+                <small errors="*{password}">Password error message</small>
+            </div>
+
+            <div class="form-group">
+                <div class="label-holder text-white textCol d-flex justify-content-center">
+                    <label for="confirmPassword" class="h4 mb-2">Confirm Password</label>
+                </div>
+                <input type="password" class="form-control" id="confirmPassword"
+                       field="*{confirmPassword}"
+                       classappend="${#fields.hasErrors('password')} ? 'bg-danger'"/>
+            </div>
+
+            <div class="button-holder d-flex justify-content-center">
+                <button type="submit" class="btn btn-warning  mb-3" value="Register">Register</button>
+            </div>
+        </form>
+    </div>
+</main>
+<div class="copyright_section"
+     th:replace="~{fragments/copyrights}">
+</div>
+</body>
+</html>

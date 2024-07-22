@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="logo" href="/"><img src="/images/logo.png" alt="Logo"></a>
+    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggle-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/movies">Movies</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tv">TV</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/celebs">Celebs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/production/all">All Productions</a>
+            </li>
+        </ul>
+        <div class="search_icon">
+            <a href="/production/add">
+                <img src="/images/notification-icon.png" alt="Add Production icon">
+                <span class="padding_left_15">Add Production</span>
+            </a>
+        </div>
+        <div class="search_icon" >
+            <a href="/celeb-add/">
+                <img src="/images/eye-icon.png" alt="Add Celebrity icon">
+                <span class="padding_left_15">Add Celebrity</span>
+            </a>
+        </div>
+        <div class="search_icon">
+            <a href="#">
+                <img src="/images/search-icon.png" alt="Watchlist icon">
+                <span class="padding_left_15">My list</span>
+            </a>
+        </div>
+        <div class="search_icon">
+            <a href="/users/login">
+                <img src="/images/user-icon.png/" alt="Login icon">
+                <span class="padding_left_15">Login</span>
+            </a>
+        </div>
+        <form th:method="post" th:action="@{/logout}">
+            <button type="submit" class="search_icon">
+                <img src="/images/logout.png" alt="Logout Icon">
+                <span class="padding_left_15">Logout</span>
+            </button>
+        </form>
+    </div>
+</nav>
+</body>
+</html>
