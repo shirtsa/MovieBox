@@ -3,6 +3,8 @@ package bg.moviebox.model.entities;
 import bg.moviebox.model.enums.Genre;
 import bg.moviebox.model.enums.ProductionType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +19,7 @@ public class Production extends BaseEntity {
     @Column(nullable = false)
     private String imageUrl;
 
-    @Column
+    @Column(nullable = false)
     private String videoUrl;
 
     @Column(nullable = false)
@@ -28,14 +30,18 @@ public class Production extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ProductionType productionType;
 
-    @Column
+    @Column(nullable = false)
+    @Min(value = 1906)
+    @Max(value = 2024)
+    private Integer year;
+
+    @Column(nullable = false)
     private Integer length;
 
     @Column
+    @Min(value = 0)
+    @Max(value = 5)
     private Integer rating;
-
-    @Column
-    private Integer year;
 
     @ManyToMany(mappedBy = "knownForMovies")
     private Set<Celebrity> celebritiesInTheMovie;
@@ -97,8 +103,8 @@ public class Production extends BaseEntity {
         return videoUrl;
     }
 
-    public Production setVideoUrl(String trailer) {
-        this.videoUrl = trailer;
+    public Production setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
         return this;
     }
 

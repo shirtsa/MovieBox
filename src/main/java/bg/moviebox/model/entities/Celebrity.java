@@ -1,6 +1,8 @@
 package bg.moviebox.model.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,12 +12,16 @@ import java.util.Set;
 public class Celebrity extends BaseEntity {
 
     @Column(nullable = false, unique = true)
+    @NotEmpty
     private String name;
 
     @Column(nullable = false)
+    @NotEmpty
     private String imageUrl;
 
     @Column(nullable = false)
+    @NotEmpty
+    @Size(min = 20)
     private String biography;
 
     @ManyToMany(fetch = FetchType.EAGER)
