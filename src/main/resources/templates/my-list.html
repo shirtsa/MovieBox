@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="~{fragments/head}"><title>Movies</title></head>
+<head th:replace="~{fragments/head}"><title>My List</title></head>
 <body>
 <div class="header_section"
-     th:replace="~{fragments/navbar::navbar(activeLink=${'/productions/movies'})}">
+     th:replace="~{fragments/navbar::navbar(activeLink=${'/productions/list'})}">
 </div>
 <div class="movies_section layout_padding">
     <div class="container">
@@ -12,8 +12,8 @@
             <h2 class="latest_text">Latest</h2>
             <div class="production_main">
                 <div class="image_movies_main"
-                     th:each="movie : ${allMovieProductions}"
-                     th:object="${movie}">
+                     th:each="production : ${myList}"
+                     th:object="${production}">
                     <div class="image_movies">
                         <div class="image_3">
                             <img th:src="*{imageUrl}" class="image" alt="Image">

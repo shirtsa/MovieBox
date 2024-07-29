@@ -13,6 +13,7 @@ public class Celebrity extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     @NotEmpty
+    @Size(min = 2)
     private String name;
 
     @Column(nullable = false)
@@ -21,7 +22,7 @@ public class Celebrity extends BaseEntity {
 
     @Column(nullable = false)
     @NotEmpty
-    @Size(min = 20)
+    @Size(min = 20, max = 5000)
     private String biography;
 
     @ManyToMany(fetch = FetchType.EAGER)

@@ -1,15 +1,22 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<nav th:fragment="navbarlogin" class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="logo" href="/"><img src="/images/logo.png" alt="Logo"></a>
-    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<nav th:fragment="navbarlogin(activeLink)" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="logo" href="/index"><img src="/images/logo.png" alt="Logo"></a>
+    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggle-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto"></ul>
-        <div class="search_icon"><a href="/login"><img src="/images/user-icon.png" alt="Login icon"><span class="padding_left_15">Login</span></a></div>
-        <div class="search_icon"><a href="/users/register"><img src="/images/add.png" alt="Register icon"><span class="padding_left_15">Register</span></a></div>
+        <div class="search_icon">
+            <a href="/users/login" th:classappend="${activeLink == 'login'}? 'active'">
+                <img src="/images/login-icon.png" alt="Login icon"><span
+                    class="padding_left_15">Login</span></a></div>
+        <div class="search_icon">
+            <a href="/users/register" th:classappend="${activeLink == 'register'}? 'active'">
+                <img src="/images/add.png" alt="Register icon"><span
+                    class="padding_left_15">Register</span></a></div>
     </div>
 </nav>
 </body>

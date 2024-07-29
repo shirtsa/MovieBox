@@ -2,6 +2,8 @@ package bg.moviebox.model.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +14,19 @@ public class User extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     @Email
+    @NotEmpty
     private String email;
 
     private String password;
 
     @Column(nullable = false)
+    @Size(min = 2, max = 20)
+    @NotEmpty
     private String firstName;
 
     @Column(nullable = false)
+    @Size(min = 2, max = 20)
+    @NotEmpty
     private String lastName;
 
     @Column
@@ -81,5 +88,17 @@ public class User extends BaseEntity {
 
     public void setRoles(List<UserRoleEntity> userRoles) {
         this.roles = userRoles;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + (password == null ? "N/A" : "[PROVIDED]") + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", active=" + active +
+                ", roles=" + roles +
+                '}';
     }
 }

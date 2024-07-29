@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head th:replace="~{fragments/head}"><title>Movies</title></head>
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}">
+    <title>All Productions</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
 <body>
-<div class="header_section"
-     th:replace="~{fragments/navbar::navbar(activeLink=${'/productions/movies'})}">
-</div>
+<div class="header_section" th:replace="~{fragments/navbar::navbar(activeLink=${'/productions/all'})}"></div>
 <div class="movies_section layout_padding">
     <div class="container">
         <div class="movies_menu" th:replace="~{fragments/overview}"></div>
@@ -12,8 +13,8 @@
             <h2 class="latest_text">Latest</h2>
             <div class="production_main">
                 <div class="image_movies_main"
-                     th:each="movie : ${allMovieProductions}"
-                     th:object="${movie}">
+                     th:each="production : ${allProductions}"
+                     th:object="${production}">
                     <div class="image_movies">
                         <div class="image_3">
                             <img th:src="*{imageUrl}" class="image" alt="Image">

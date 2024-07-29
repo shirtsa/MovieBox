@@ -3,8 +3,7 @@ package bg.moviebox.model.entities;
 import bg.moviebox.model.enums.Genre;
 import bg.moviebox.model.enums.ProductionType;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,12 +13,16 @@ import java.util.Set;
 public class Production extends BaseEntity {
 
     @Column(nullable = false, unique = true)
+    @NotEmpty
+    @Size(min = 2, max = 200)
     private String name;
 
     @Column(nullable = false)
+    @NotEmpty
     private String imageUrl;
 
     @Column(nullable = false)
+    @NotEmpty
     private String videoUrl;
 
     @Column(nullable = false)
@@ -31,17 +34,25 @@ public class Production extends BaseEntity {
     private ProductionType productionType;
 
     @Column(nullable = false)
+    @NotNull
     @Min(value = 1906)
     @Max(value = 2024)
     private Integer year;
 
     @Column(nullable = false)
+    @NotNull
     private Integer length;
 
     @Column
+    @NotNull
     @Min(value = 0)
     @Max(value = 5)
     private Integer rating;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    @NotEmpty
+    @Size(min = 50, max = 5000)
+    private String description;
 
     @ManyToMany(mappedBy = "knownForMovies")
     private Set<Celebrity> celebritiesInTheMovie;
@@ -123,6 +134,15 @@ public class Production extends BaseEntity {
 
     public Production setYear(Integer year) {
         this.year = year;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Production setDescription(String description) {
+        this.description = description;
         return this;
     }
 

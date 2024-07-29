@@ -4,62 +4,64 @@
 <head th:replace="~{fragments/head}"><title>Register</title></head>
 <body>
 <div class="header_section"
-     th:replace="~{fragments/navbarlogin}">
+     th:replace="~{fragments/navbarlogin::navbarlogin(activeLink=${'register'})}">
 </div>
-<main class="registration_page">
+<main class="common_page registration_page">
     <div class="registration-container">
         <form class="mx-auto w-25 bg-blur rounded"
               th:method="post"
               th:action="@{/users/register}"
-              object="${userRegistrationDTO}">
+              th:object="${userRegistrationDTO}">
 
             <div class="form-group">
                 <div class="label-holder text-white textCol d-flex justify-content-center">
-                    <label for="email" class="h4 mb-2">Email</label>
+                    <label th:for="email" class="h4 mb-2">Email</label>
                 </div>
-                <input type="email" class="form-control" id="email"
-                       field="*{email}"
-                       errorclass="bg-danger"/>
-                <small errors="*{email}">Email error message</small>
+                <input type="email"
+                       id="email"
+                       class="form-control"
+                       th:field="*{email}"
+                       th:errorclass="bg-danger"/>
+                <small th:errors="*{email}">Email error message</small>
             </div>
 
             <div class="form-group">
                 <div class="label-holder textCol d-flex justify-content-center">
-                    <label for="firstName" class="h4 mb-2 text-white">First Name</label>
+                    <label th:for="firstName" class="h4 mb-2 text-white">First Name</label>
                 </div>
                 <input type="text" class="form-control" id="firstName"
-                       field="*{firstName}"
-                       errorclass="bg-danger"/>
-                <small errors="*{firstName}">First Name error message</small>
+                       th:field="*{firstName}"
+                       th:errorclass="bg-danger"/>
+                <small th:errors="*{firstName}">First Name error message</small>
             </div>
 
             <div class="form-group">
                 <div class="label-holder textCol d-flex justify-content-center">
-                    <label for="lastName" class="h4 mb-2 text-white">Last Name</label>
+                    <label th:for="lastName" class="h4 mb-2 text-white">Last Name</label>
                 </div>
                 <input type="text" class="form-control" id="lastName"
-                       field="*{lastName}"
-                       errorclass="bg-danger"/>
-                <small errors="*{LastName}">Last Name error message</small>
+                       th:field="*{lastName}"
+                       th:errorclass="bg-danger"/>
+                <small th:errors="*{LastName}">Last Name error message</small>
             </div>
 
             <div class="form-group">
                 <div class="label-holder text-white textCol d-flex justify-content-center">
-                    <label for="password" class="h4 mb-2">Password</label>
+                    <label th:for="password" class="h4 mb-2">Password</label>
                 </div>
                 <input type="password" class="form-control" id="password"
-                       field="*{password}"
-                       errorclass="bg-danger"/>
-                <small errors="*{password}">Password error message</small>
+                       th:field="*{password}"
+                       th:errorclass="bg-danger"/>
+                <small th:errors="*{password}">Password error message</small>
             </div>
 
             <div class="form-group">
                 <div class="label-holder text-white textCol d-flex justify-content-center">
-                    <label for="confirmPassword" class="h4 mb-2">Confirm Password</label>
+                    <label th:for="confirmPassword" class="h4 mb-2">Confirm Password</label>
                 </div>
                 <input type="password" class="form-control" id="confirmPassword"
-                       field="*{confirmPassword}"
-                       classappend="${#fields.hasErrors('password')} ? 'bg-danger'"/>
+                       th:field="*{confirmPassword}"
+                       th:classappend="${#fields.hasErrors('password')} ? 'bg-danger'"/>
             </div>
 
             <div class="button-holder d-flex justify-content-center">

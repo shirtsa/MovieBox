@@ -3,11 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/head}"><title>Index page</title></head>
 <body>
-<!-- header section start -->
-<div class="header_section"
-     th:replace="~{fragments/navbar}">
-</div>
-<!-- header section end -->
+<div class="header_section" th:replace="~{fragments/navbar::navbar(activeLink=${'index'})}"></div>
 <!-- banner section start -->
 <div class="banner_section layout_padding">
     <div class="container">
@@ -15,7 +11,7 @@
             <div class="col-md-6">
                 <div class="banner_title">Enjoy <br>The movies And TV shows</div>
                 <p class="banner_text" >Create account and have fun!</p>
-                <div class="see_bt" ><a href="/users/register">Register</a></div>
+                <div class="see_bt"><a href="/users/register">Register</a></div>
             </div>
             <div class="col-md-6">
                 <div class="play_icon"><a href="#"><img src="/images/play-icon.png" alt="Play icon"></a></div>
@@ -304,13 +300,7 @@
     </div>
 </div>
 <!-- coming  section end -->
-<!-- footer  section start -->
 <footer th:replace="~{fragments/footer}"></footer>
-<!-- footer  section end -->
-<!-- copyright section start -->
-<div class="copyright_section"
-     th:replace="~{fragments/copyrights}">
-</div>
-<!-- copyright section end -->
+<div class="copyright_section" th:replace="~{fragments/copyrights}"></div>
 </body>
 </html>

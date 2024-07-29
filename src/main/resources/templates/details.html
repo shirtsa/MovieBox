@@ -1,11 +1,54 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/head}"><title>All Productions</title></head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="~{fragments/head}"><title>Production Details</title></head>
 <body>
 <div class="header_section"
      th:replace="~{fragments/navbar}">
 </div>
-
+<div class="common_page production_details_page"
+     th:style="'background-image: url(' + ${productionDetails.imageUrl} + ');'">
+    <div th:object="${productionDetails}">
+        <h1 class="production-details-title" th:text="*{name}">Movie Title</h1>
+        <div class="production-details">
+            <span th:text="'Released: ' + *{year}">Release Date</span>
+            <span th:text="'(' + *{length} + ' min' + ')'">Movie Length</span>
+        </div>
+        <div class="production-details-button">
+            <div class="details-play-btn btn-common">
+                <a th:href="*{videoUrl}">
+                    <img src="/images/play-btn.png" alt="Play icon">
+                    <span>Play</span>
+                </a>
+            </div>
+            <div class="my-playlist-btn btn-common">
+                <a th:href="@{/my-list}">
+                    <img src="/images/plus-btn.png" alt="Play icon">
+                    <span>My Playlist</span>
+                </a>
+            </div>
+            <div class="details-update-btn btn-common">
+                <img src="/images/update-btn.png" alt="Update icon">
+                <form th:method="update" th:action="@{/productions/{id}(id=*{id})}">
+                    <input class="btn btn-link" type="submit" value="Update">
+                </form>
+            </div>
+            <div class="details-delete-btn btn-common">
+                <img src="/images/delete-btn.png" alt="Delete icon">
+                <form th:method="delete" th:action="@{/productions/{id}(id=*{id})}">
+                    <input class="btn btn-link" type="submit" value="Delete">
+                </form>
+            </div>
+<!--            <button type="button" class="details-play-btn">>Play</button>-->
+<!--            <button type="button" class="add-to-playlist">My Playlist</button>-->
+        </div>
+        <div class="production-details-genre" th:text="'Genre: ' + *{genre}">
+            Movie Genre
+        </div>
+        <div class="production-details-description" th:text="*{description}">
+            Movie description goes here.
+        </div>
+    </div>
+</div>
 </body>
 <div class="copyright_section"
      th:replace="~{fragments/copyrights}">

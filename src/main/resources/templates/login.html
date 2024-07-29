@@ -4,14 +4,14 @@
 <head th:replace="~{fragments/head}"><title>Login page</title></head>
 <body>
 <div class="header_section"
-     th:replace="~{fragments/navbarlogin}">
+     th:replace="~{fragments/navbarlogin::navbarlogin(activeLink=${'login'})}">
 </div>
-<main class="login_page">
+<main class="common_page login_page">
     <div class="registration-container">
         <form class="mx-auto w-25 bg-blur"
               th:action="@{/users/login}"
               th:method="post"
-              object="${loginDTO}">
+              object="${userLoginDTO}">
 
 <!--            <div errors="*{username}" class="text-danger">Error messages</div>-->
 <!--            <div errors="*{password}" class="text-danger">Error messages</div>-->
@@ -19,10 +19,12 @@
 
             <div class="form-group">
                 <div class="label-holder text-white d-flex justify-content-center">
-                    <label for="username" class="h3 mb-2">Username</label>
+                    <label for="email" class="h3 mb-2">Email</label>
                 </div>
-                <input type="text" class="form-control" id="username"
-                       field="*{username}"
+                <input type="text"
+                       class="form-control"
+                       id="email"
+                       field="*{email}"
                        errorclass="bg-danger"/>
             </div>
 
@@ -30,7 +32,9 @@
                 <div class="label-holder text-white d-flex justify-content-center">
                     <label for="password" class="h3 mb-2">Password</label>
                 </div>
-                <input type="password" class="form-control" id="password"
+                <input type="password"
+                       class="form-control"
+                       id="password"
                        field="*{password}"
                        errorclass="bg-danger"/>
             </div>

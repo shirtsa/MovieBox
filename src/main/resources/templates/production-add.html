@@ -3,13 +3,13 @@
 <head th:replace="~{fragments/head}"><title>Add Productions</title></head>
 <body>
 <div class="header_section"
-     th:replace="~{fragments/navbar}">
+     th:replace="~{fragments/navbar::navbar(activeLink=${'/productions/add'})}">
 </div>
-<div class="production_page">
+<div class="common_page production_page production_add_page">
     <div class="container">
         <h2 class="text-center text-white">Add Production</h2>
         <form th:method="post"
-              th:action="@{/production/add}"
+              th:action="@{/productions/add}"
               th:object="${addProductionDTO}"
               class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
             <div class="row">
@@ -18,12 +18,14 @@
                     <label class="text-center text-white font-weight-bold" th:for="name">Production Name</label>
                     <input id="name"
                            th:field="*{name}"
-                           errorclass="bg-danger"
+                           th:errorclass="is-invalid"
                            type="text"
                            class="form-control"
                            placeholder="Production name"/>
+                    <!--                    <p th:errors="*{name}" class="errors alert alert-danger">Name error</p>-->
+                    <!--                    <small th:each="error : ${#fields.errors('name')}" th:text="${error}" class="text-danger"></small>-->
                     <p class="invalid-feedback errors alert alert-danger">
-                        Production name is required.
+                        Production name is required and should be at least 1 symbol.
                     </p>
                 </div>
                 <!-- EO: Production name -->
@@ -32,7 +34,7 @@
                     <label class="text-center text-white font-weight-bold" th:for="length">Length</label>
                     <input id="length"
                            th:field="*{length}"
-                           errorclass="is-invalid"
+                           th:errorclass="is-invalid"
                            type="number"
                            class="form-control"
                            placeholder="Production length"/>
@@ -50,7 +52,7 @@
                     <select id="productionType"
                             name="productionType"
                             th:field="*{productionType}"
-                            errorclass="is-invalid"
+                            th:errorclass="is-invalid"
                             class="form-control">
                         <option value="">- Select production type -</option>
                         <option th:each="type : ${productionTypes}"
@@ -68,7 +70,7 @@
                     <label class="text-center text-white font-weight-bold" th:for="genre">Genre</label>
                     <select id="genre"
                             th:field="*{genre}"
-                            errorclass="is-invalid"
+                            th:errorclass="is-invalid"
                             class="form-control">
                         <option value="">- Select genre -</option>
                         <option th:each="type : ${genreTypes}"
@@ -76,18 +78,19 @@
                                 th:value="${type}">
                         </option>
                     </select>
-                    <p class="invalid-feedback  errors alert alert-danger">
+                    <p class="invalid-feedback errors alert alert-danger">
                         Genre type is required.
                     </p>
                 </div>
                 <!-- EO: Genre -->
             </div>
             <div class="row">
+                <!-- Year -->
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-white font-weight-bold" th:for="year">Year</label>
                     <input id="year"
                            th:field="*{year}"
-                           errorclass="is-invalid"
+                           th:errorclass="is-invalid"
                            type="number" min="1906" max="2024" step="1"
                            class="form-control"
                            placeholder="Released year"/>
@@ -95,12 +98,13 @@
                         Released year is required and should be at least 1906.
                     </p>
                 </div>
+                <!-- EO: Year -->
                 <!-- Rating -->
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-white font-weight-bold" th:for="rating">Rating</label>
                     <input id="rating"
                            th:field="*{rating}"
-                           errorclass="is-invalid"
+                           th:errorclass="is-invalid"
                            type="number"
                            class="form-control"
                            placeholder="Production rating"/>
@@ -114,12 +118,27 @@
                 </div>
                 <!-- EO: Rating -->
             </div>
+            <div class="form-group">
+                <label class="text-white font-weight-bold" th:for="description">Description</label>
+                <textarea
+                        th:field="*{description}"
+                        th:errorclass="is-invalid"
+                        type="textarea"
+                        class="form-control"
+                        rows="3"
+                        placeholder="Description">
+                    </textarea>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Description is required and should be at least 50 symbols.
+                </p>
+                <!--                <small th:each="err : ${#fields.errors('description')}" th:text="${err}" class="text-danger"></small>-->
+            </div>
             <!-- Image URL -->
             <div class="form-group">
                 <label class="text-white font-weight-bold" th:for="imageUrl">Image URL</label>
                 <input id="imageUrl"
                        th:field="*{imageUrl}"
-                       errorclass="is-invalid"
+                       th:errorclass="is-invalid"
                        type="url" class="form-control"
                        placeholder="Put production image URL here">
                 <p class="invalid-feedback errors alert alert-danger">
@@ -132,7 +151,7 @@
                 <label class="text-white font-weight-bold" th:for="videoUrl">Video URL</label>
                 <input id="videoUrl"
                        th:field="*{videoUrl}"
-                       errorclass="is-invalid"
+                       th:errorclass="is-invalid"
                        type="url" class="form-control"
                        placeholder="Put production video URL here">
                 <p class="invalid-feedback errors alert alert-danger">
@@ -150,6 +169,7 @@
         </form>
     </div>
 </div>
+<script th:src="@{/js/dynamicBackgroundImages.js}"></script>
 <!-- movies section end -->
 </body>
 <!-- copyright section start -->

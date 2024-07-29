@@ -3,13 +3,13 @@
 <head th:replace="~{fragments/head}"><title>Add Celebrity</title></head>
 <body>
 <div class="header_section"
-     th:replace="~{fragments/navbar}">
+     th:replace="~{fragments/navbar::navbar(activeLink=${'celebrity-add'})}">
 </div>
-<div class="add_celebrity_page">
+<div class="common_page add_celebrity_page">
     <div class="container">
         <h2 class="text-center text-white">Add Celebrity</h2>
         <form th:method="post"
-              th:action="@{/celebs/add}"
+              th:action="@{/celebrities/add}"
               th:object="${addCelebrityDTO}"
               class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
             <div class="row">
@@ -71,9 +71,6 @@
         </form>
     </div>
 </div>
-<!-- footer  section start -->
-<footer th:replace="~{fragments/footer}"></footer>
-<!-- footer  section end -->
 <!-- copyright section start -->
 <div class="copyright_section"
      th:replace="~{fragments/copyrights}">
