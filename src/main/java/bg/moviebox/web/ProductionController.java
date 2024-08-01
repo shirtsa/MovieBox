@@ -88,6 +88,7 @@ public class ProductionController {
     @GetMapping("/list")
     public String myList(Model model) {
 
+        // TODO my list from current logged user!
         model.addAttribute("myList");
 
         return "my-list";

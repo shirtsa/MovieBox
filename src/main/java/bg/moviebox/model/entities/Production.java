@@ -49,6 +49,11 @@ public class Production extends BaseEntity {
     @Max(value = 5)
     private Integer rating;
 
+    @Column
+    @PositiveOrZero
+    @NotNull
+    private Integer rentPrice;
+
     @Column(nullable = false, columnDefinition = "TEXT")
     @NotEmpty
     @Size(min = 50, max = 5000)
@@ -110,6 +115,15 @@ public class Production extends BaseEntity {
         return this;
     }
 
+    public Integer getRentPrice() {
+        return rentPrice;
+    }
+
+    public Production setRentPrice(Integer rentPrice) {
+        this.rentPrice = rentPrice;
+        return this;
+    }
+
     public String getVideoUrl() {
         return videoUrl;
     }
@@ -162,5 +176,23 @@ public class Production extends BaseEntity {
     public Production setCelebritiesInTheTvShow(Set<Celebrity> celebritiesInTheTvShow) {
         this.celebritiesInTheTvShow = celebritiesInTheTvShow;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Production{" +
+                "name='" + name + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
+                ", genre=" + genre +
+                ", productionType=" + productionType +
+                ", year=" + year +
+                ", length=" + length +
+                ", rating=" + rating +
+                ", rentPrice=" + rentPrice +
+                ", description='" + description + '\'' +
+                ", celebritiesInTheMovie=" + celebritiesInTheMovie +
+                ", celebritiesInTheTvShow=" + celebritiesInTheTvShow +
+                '}';
     }
 }

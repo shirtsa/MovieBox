@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ProductionService {
 
-    long createProduction(AddProductionDTO addProductionDTO);
+    void createProduction(AddProductionDTO addProductionDTO); //long
 
     void deleteProduction(Long productionId);
 

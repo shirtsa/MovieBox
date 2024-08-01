@@ -81,4 +81,15 @@ public class Celebrity extends BaseEntity {
     public void setKnownForTvShows(Set<Production> knownForTvShows) {
         this.knownForTvShows = knownForTvShows;
     }
+
+    @Override
+    public String toString() {
+        return "Celebrity{" +
+                "name='" + name + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", biography='" + biography + '\'' +
+                ", knownForMovies=" + knownForMovies +
+                ", knownForTvShows=" + knownForTvShows +
+                '}';
+    }
 }

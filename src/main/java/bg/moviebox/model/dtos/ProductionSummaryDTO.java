@@ -11,6 +11,7 @@ public record ProductionSummaryDTO(
         Integer year,
         Integer length,
         Integer rating,
+        Integer rentPrice,
         String description,
         ProductionType productionType,
         Genre genre) {

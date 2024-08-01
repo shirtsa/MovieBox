@@ -3,6 +3,8 @@ package bg.moviebox.model.dtos;
 import bg.moviebox.model.enums.Genre;
 import bg.moviebox.model.enums.ProductionType;
 
+import java.util.List;
+
 public record ProductionDetailsDTO(
         Long id,
         String name,
@@ -11,8 +13,10 @@ public record ProductionDetailsDTO(
         Integer year,
         Integer length,
         Integer rating,
+        Integer rentPrice,
         String description,
         ProductionType productionType,
-        Genre genre) {
+        Genre genre,
+        List<String> allCurrencies) {
 
 }

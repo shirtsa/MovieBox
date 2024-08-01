@@ -21,12 +21,16 @@ public record AddProductionDTO(
         Integer length,
         @PositiveOrZero
         Integer rating,
+
+        @PositiveOrZero
+        @NotNull
+        Integer rentPrice,
         @NotEmpty(message = "add.description.not.empty")
         @Size(message = "add.description.length", min = 50, max = 5000) String description,
         ProductionType productionType,
         Genre genre) {
 
     public static AddProductionDTO empty() {
-        return new AddProductionDTO(null, null, null, null, null, null, null, null, null, null);
+        return new AddProductionDTO(null, null, null,null, null, null, null, null, null, null, null);
     }
 }

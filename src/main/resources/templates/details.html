@@ -14,12 +14,22 @@
             <span th:text="'(' + *{length} + ' min' + ')'">Movie Length</span>
         </div>
         <div class="production-details-button">
-            <div class="details-play-btn btn-common">
-                <a th:href="*{videoUrl}">
-                    <img src="/images/play-btn.png" alt="Play icon">
-                    <span>Play</span>
+            <div class="details-rent-btn btn-common">
+                <a id="rentPlayButton" data-rent-price="*{rentPrice}" th:href="*{videoUrl}">
+                    <img id="rentIcon" src="/images/rent-btn.png" alt="Rent icon">
+                    <img id="playIcon" src="/images/play-btn.png" alt="Play icon" style="display: none;">
+                    <span id="rentPlayText" th:text="'Rent ' + *{rentPrice}">Rent</span>
                 </a>
+                <select id="currency">
+                    <option
+                            th:each="currency : *{allCurrencies}"
+                            th:value="${currency}"
+                            th:selected="${currency} == 'BGN'"
+                            th:text="${currency}">
+                    </option>
+                </select>
             </div>
+            <input type="hidden" id="rentPriceInBGN" th:value="*{rentPrice}">
             <div class="my-playlist-btn btn-common">
                 <a th:href="@{/my-list}">
                     <img src="/images/plus-btn.png" alt="Play icon">
@@ -38,8 +48,6 @@
                     <input class="btn btn-link" type="submit" value="Delete">
                 </form>
             </div>
-<!--            <button type="button" class="details-play-btn">>Play</button>-->
-<!--            <button type="button" class="add-to-playlist">My Playlist</button>-->
         </div>
         <div class="production-details-genre" th:text="'Genre: ' + *{genre}">
             Movie Genre
@@ -49,8 +57,8 @@
         </div>
     </div>
 </div>
+<script th:src="@{/js/rentPlayButtonHandler.js}"></script>
+<script th:src="@{/js/currency.js}"></script>
+<div class="copyright_section" th:replace="~{fragments/copyrights}"></div>
 </body>
-<div class="copyright_section"
-     th:replace="~{fragments/copyrights}">
-</div>
 </html>

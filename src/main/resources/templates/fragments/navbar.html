@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <nav th:fragment="navbar(activeLink)" class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="logo" href="/index"><img src="/images/logo.png" alt="Logo"></a>
+    <a class="logo" href="/"><img src="/images/logo.png" alt="Logo"></a>
     <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggle-icon"></span>
@@ -10,28 +11,31 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/index" th:classappend="${activeLink == 'index'}? 'active'">Home</a>
+                <a class="nav-link" href="/" th:classappend="${activeLink == 'index'}? 'active'">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/productions/movies" th:classappend="${activeLink == '/productions/movies'}? 'active'">Movies</a>
+                <a class="nav-link" href="/productions/movies"
+                   th:classappend="${activeLink == '/productions/movies'}? 'active'">Movies</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/productions/tv" th:classappend="${activeLink == '/productions/tv'}? 'active'">TV</a>
+                <a class="nav-link" href="/productions/tv"
+                   th:classappend="${activeLink == '/productions/tv'}? 'active'">TV</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/celebrities/all" th:classappend="${activeLink == 'celebrities'}? 'active'">Celebs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/productions/all" th:classappend="${activeLink == '/productions/all'}? 'active'">All Productions</a>
+                <a class="nav-link" href="/productions/all"
+                   th:classappend="${activeLink == '/productions/all'}? 'active'">All Productions</a>
             </li>
         </ul>
-        <div class="search_icon">
+        <div class="search_icon" sec:authorize="hasRole('ADMIN')">
             <a href="/productions/add" th:classappend="${activeLink == '/productions/add'}? 'active'">
                 <img src="/images/movie.png" alt="Add Production icon">
                 <span class="padding_left_15">Add Production</span>
             </a>
         </div>
-        <div class="search_icon" >
+        <div class="search_icon">
             <a href="/celebrities/add" th:classappend="${activeLink == 'celebrity-add'}? 'active'">
                 <img src="/images/celebs-add-btn.png" alt="Add Celebrity icon">
                 <span class="padding_left_15">Add Celebrity</span>
@@ -43,19 +47,97 @@
                 <span class="padding_left_15">My list</span>
             </a>
         </div>
-        <div class="search_icon">
+        <div class="search_icon" sec:authorize="!isAuthenticated()">
             <a href="/users/login" th:classappend="${activeLink == 'login'}? 'active'">
                 <img src="/images/login-icon.png/" alt="Login icon">
                 <span class="padding_left_15">Login</span>
             </a>
         </div>
-        <form th:method="post" th:action="@{/users/logout}">
-            <button type="submit" class="search_icon">
-                <img src="/images/logout.png" alt="Logout Icon">
-                <span class="padding_left_15">Logout</span>
-            </button>
-        </form>
+        <div class="search_icon" sec:authorize="!isAuthenticated()">
+            <a href="/users/register" th:classappend="${activeLink == 'register'}? 'active'">
+                <img src="/images/add.png" alt="Register icon"><span
+                    class="padding_left_15">Register</span></a>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            <form th:method="post"
+                  th:action="@{/users/logout}">
+                <button type="submit" class="search_icon">
+                    <img src="/images/logout.png" alt="Logout Icon">
+                    <span class="padding_left_15">Logout</span>
+                </button>
+            </form>
+        </div>
     </div>
 </nav>
 </body>
 </html>
+
+<!--<!doctype html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<body>-->
+<!--<nav th:fragment="navbar(activeLink, isLoggedIn)" class="navbar navbar-expand-lg navbar-light bg-light">-->
+<!--    <a class="logo" href="/"><img src="/images/logo.png" alt="Logo"></a>-->
+<!--    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
+<!--            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggle-icon"></span>-->
+<!--    </button>-->
+<!--    <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--        <ul class="navbar-nav mr-auto">-->
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link" href="/" th:classappend="${activeLink == 'index'}? 'active'">Home</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/productions/movies" th:classappend="${activeLink == '/productions/movies'}? 'active'">Movies</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/productions/tv" th:classappend="${activeLink == '/productions/tv'}? 'active'">TV</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/celebrities/all" th:classappend="${activeLink == 'celebrities'}? 'active'">Celebs</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/productions/all" th:classappend="${activeLink == '/productions/all'}? 'active'">All Productions</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--        <div class="search_icon">-->
+<!--            <a href="/productions/add" th:classappend="${activeLink == '/productions/add'}? 'active'">-->
+<!--                <img src="/images/movie.png" alt="Add Production icon">-->
+<!--                <span class="padding_left_15">Add Production</span>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div class="search_icon">-->
+<!--            <a href="/celebrities/add" th:classappend="${activeLink == 'celebrity-add'}? 'active'">-->
+<!--                <img src="/images/celebs-add-btn.png" alt="Add Celebrity icon">-->
+<!--                <span class="padding_left_15">Add Celebrity</span>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div class="search_icon">-->
+<!--            <a href="/productions/list" th:classappend="${activeLink == '/productions/list'}? 'active'">-->
+<!--                <img src="/images/my-playlist-btn.png" alt="Watchlist icon">-->
+<!--                <span class="padding_left_15">My list</span>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div class="search_icon" th:if="${isLoggedIn}">-->
+<!--            <form th:method="post" th:action="@{/users/logout}">-->
+<!--                <button type="submit" class="search_icon">-->
+<!--                    <img src="/images/logout.png" alt="Logout Icon">-->
+<!--                    <span class="padding_left_15">Logout</span>-->
+<!--                </button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--        <div class="search_icon" th:unless="${isLoggedIn}">-->
+<!--            <a href="/users/login" th:classappend="${activeLink == 'login'}? 'active'">-->
+<!--                <img src="/images/login-icon.png" alt="Login icon">-->
+<!--                <span class="padding_left_15">Login</span>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div class="search_icon" th:unless="${isLoggedIn}">-->
+<!--            <a href="/users/register" th:classappend="${activeLink == 'register'}? 'active'">-->
+<!--                <img src="/images/add.png" alt="Register icon">-->
+<!--                <span class="padding_left_15">Register</span>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</nav>-->
+<!--</body>-->
+<!--</html>-->

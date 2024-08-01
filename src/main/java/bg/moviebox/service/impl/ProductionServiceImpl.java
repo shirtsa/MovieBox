@@ -6,8 +6,15 @@ import bg.moviebox.model.dtos.ProductionSummaryDTO;
 import bg.moviebox.model.entities.Production;
 import bg.moviebox.model.enums.ProductionType;
 import bg.moviebox.repository.ProductionRepository;
+import bg.moviebox.service.ExchangeRateService;
 import bg.moviebox.service.ProductionService;
+import bg.moviebox.service.exception.ObjectNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,15 +22,28 @@ import java.util.stream.Collectors;
 @Service
 public class ProductionServiceImpl implements ProductionService {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(ProductionServiceImpl.class);
+    private final RestClient productionRestClient;
     private final ProductionRepository productionRepository;
+    private final ExchangeRateService exchangeRateService;
 
-    public ProductionServiceImpl(ProductionRepository productionRepository) {
+    public ProductionServiceImpl(@Qualifier("productionsRestClient") RestClient productionRestClient,
+            ProductionRepository productionRepository,
+                                 ExchangeRateService exchangeRateService) {
+        this.productionRestClient = productionRestClient;
         this.productionRepository = productionRepository;
+        this.exchangeRateService = exchangeRateService;
     }
 
     @Override
-    public long createProduction(AddProductionDTO addProductionDTO) {
-       return productionRepository.save(map(addProductionDTO)).getId();
+    public void createProduction(AddProductionDTO addProductionDTO) {
+        LOGGER.debug("Creating new production...");
+
+       productionRestClient
+               .post()
+               .uri("http://localhost:8081/productions")
+               .body(addProductionDTO)
+               .retrieve();
     }
 
     @Override
@@ -35,8 +55,8 @@ public class ProductionServiceImpl implements ProductionService {
     public ProductionDetailsDTO getProductionDetails(Long id) {
         return this.productionRepository
                 .findById(id)
-                .map(ProductionServiceImpl::toProductionDetailsDTO)
-                .orElseThrow();
+                .map(this::toProductionDetailsDTO)
+                .orElseThrow(() -> new ObjectNotFoundException("Production not found!", id));
     }
 
     @Override
@@ -53,7 +73,7 @@ public class ProductionServiceImpl implements ProductionService {
         List<Production> movieProductions = productionRepository.findProductionsByProductionType(ProductionType.MOVIE);
         return movieProductions
                 .stream()
-                .map(ProductionServiceImpl::toProductionDetailsDTO)
+                .map(this::toProductionDetailsDTO)
                 .collect(Collectors.toList());
     }
 
@@ -62,7 +82,7 @@ public class ProductionServiceImpl implements ProductionService {
         List<Production> tvProductions = productionRepository.findProductionsByProductionType(ProductionType.TV);
         return tvProductions
                 .stream()
-                .map(ProductionServiceImpl::toProductionDetailsDTO)
+                .map(this::toProductionDetailsDTO)
                 .collect(Collectors.toList());
     }
 
@@ -75,13 +95,14 @@ public class ProductionServiceImpl implements ProductionService {
                 production.getYear(),
                 production.getLength(),
                 production.getRating(),
+                production.getRentPrice(),
                 production.getDescription(),
                 production.getProductionType(),
                 production.getGenre());
     }
 
     //Mapped Production entity to ProductionDetails DTO
-    private static ProductionDetailsDTO toProductionDetailsDTO(Production production) {
+    private ProductionDetailsDTO toProductionDetailsDTO(Production production) {
         return new ProductionDetailsDTO(
                 production.getId(),
                 production.getName(),
@@ -90,9 +111,11 @@ public class ProductionServiceImpl implements ProductionService {
                 production.getYear(),
                 production.getLength(),
                 production.getRating(),
+                production.getRentPrice(),
                 production.getDescription(),
                 production.getProductionType(),
-                production.getGenre());
+                production.getGenre(),
+                exchangeRateService.allSupportedCurrencies());
     }
 
     //Mapped Production DTO to production entity
@@ -103,6 +126,7 @@ public class ProductionServiceImpl implements ProductionService {
                 .setGenre(addProductionDTO.genre())
                 .setLength(addProductionDTO.length())
                 .setRating(addProductionDTO.rating())
+                .setRentPrice(addProductionDTO.rentPrice())
                 .setVideoUrl(addProductionDTO.videoUrl())
                 .setYear(addProductionDTO.year())
                 .setDescription(addProductionDTO.description())

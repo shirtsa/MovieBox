@@ -4,7 +4,7 @@
 <head th:replace="~{fragments/head}"><title>Login page</title></head>
 <body>
 <div class="header_section"
-     th:replace="~{fragments/navbarlogin::navbarlogin(activeLink=${'login'})}">
+     th:replace="~{fragments/navbar::navbar(activeLink=${'login'})}">
 </div>
 <main class="common_page login_page">
     <div class="registration-container">
@@ -24,6 +24,7 @@
                 <input type="text"
                        class="form-control"
                        id="email"
+                       name="email"
                        field="*{email}"
                        errorclass="bg-danger"/>
             </div>
@@ -35,6 +36,7 @@
                 <input type="password"
                        class="form-control"
                        id="password"
+                       name="password"
                        field="*{password}"
                        errorclass="bg-danger"/>
             </div>
