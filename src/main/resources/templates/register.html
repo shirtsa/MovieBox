@@ -15,7 +15,7 @@
 
             <div class="form-group">
                 <div class="label-holder text-white textCol d-flex justify-content-center">
-                    <label th:for="email" class="h4 mb-2">Email</label>
+                    <label th:for="email" class="h4 mb-2" th:text="#{register_email_text}">Email</label>
                 </div>
                 <input type="email"
                        id="email"
@@ -27,7 +27,7 @@
 
             <div class="form-group">
                 <div class="label-holder textCol d-flex justify-content-center">
-                    <label th:for="firstName" class="h4 mb-2 text-white">First Name</label>
+                    <label th:for="firstName" class="h4 mb-2 text-white" th:text="#{register_first_name}">First Name</label>
                 </div>
                 <input type="text" class="form-control" id="firstName"
                        th:field="*{firstName}"
@@ -37,17 +37,17 @@
 
             <div class="form-group">
                 <div class="label-holder textCol d-flex justify-content-center">
-                    <label th:for="lastName" class="h4 mb-2 text-white">Last Name</label>
+                    <label th:for="lastName" class="h4 mb-2 text-white" th:text="#{register_last_name}">Last Name</label>
                 </div>
                 <input type="text" class="form-control" id="lastName"
                        th:field="*{lastName}"
                        th:errorclass="bg-danger"/>
-                <small th:errors="*{LastName}">Last Name error message</small>
+                <small th:errors="*{lastName}">Last Name error message</small>
             </div>
 
             <div class="form-group">
                 <div class="label-holder text-white textCol d-flex justify-content-center">
-                    <label th:for="password" class="h4 mb-2">Password</label>
+                    <label th:for="password" class="h4 mb-2" th:text="#{register_password_text}">Password</label>
                 </div>
                 <input type="password" class="form-control" id="password"
                        th:field="*{password}"
@@ -57,7 +57,7 @@
 
             <div class="form-group">
                 <div class="label-holder text-white textCol d-flex justify-content-center">
-                    <label th:for="confirmPassword" class="h4 mb-2">Confirm Password</label>
+                    <label th:for="confirmPassword" class="h4 mb-2" th:text="#{register_confirm_password_text}">Confirm Password</label>
                 </div>
                 <input type="password" class="form-control" id="confirmPassword"
                        th:field="*{confirmPassword}"
@@ -65,7 +65,7 @@
             </div>
 
             <div class="button-holder d-flex justify-content-center">
-                <button type="submit" class="btn btn-warning  mb-3" value="Register">Register</button>
+                <button type="submit" class="btn btn-warning  mb-3" value="Register" th:text="#{register_btn}">Register</button>
             </div>
         </form>
     </div>

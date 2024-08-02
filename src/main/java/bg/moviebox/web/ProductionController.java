@@ -56,9 +56,11 @@ public class ProductionController {
             return "redirect:/productions/add";
         }
 
-        long newOfferId = productionService.createProduction(addProductionDTO);
+//        long newOfferId = productionService.createProduction(addProductionDTO);
+        productionService.createProduction(addProductionDTO);
 
-        return "redirect:/productions/" + newOfferId;
+//        return "redirect:/productions/" + newOfferId;
+        return "redirect:/productions/all";
     }
 
     @GetMapping("/all")

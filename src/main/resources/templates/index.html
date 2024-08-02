@@ -3,20 +3,24 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/head}"><title>Index page</title></head>
 <body>
-<div class="header_section" th:replace="~{fragments/navbar::navbar(activeLink=${'index'})}"></div>
+<div class="header_section" th:replace="~{fragments/navbar::navbar(activeLink=${'/'})}"></div>
 <!-- banner section start -->
 <div class="banner_section layout_padding">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-<!--                <div class="banner_title">-->
-<!--                    <h5 class="text-center text-white mt-5">Welcome to MovieBox,-->
-<!--                        <th:block th:text="${welcomeMessage}"></th:block>!-->
-<!--                    </h5>-->
-<!--                </div>-->
-                <div class="banner_title">Enjoy <br>The movies And TV shows</div>
-                <p class="banner_text">Create account and have fun!</p>
-                <div class="see_bt"><a href="/users/register">Register</a></div>
+                <div class="banner_title">
+                    <h5 class="text-center text-white mt-5" th:text="#{banner_title_welcome_text}">Welcome to MovieBox,
+                        <th:block th:text="${welcomeMessage}"></th:block>
+                    </h5>
+                </div>
+                <div class="banner_title">
+                    <span th:text="#{banner_title_first}">Enjoy</span>
+                    <br>
+                    <span th:text="#{banner_title_second}">The movies And TV shows</span>
+                </div>
+                <p class="banner_text" th:text="#{banner_text_third}">Create account and have fun!</p>
+                <div class="see_bt"><a href="/users/register" th:text="#{banner_register_btn}">Register</a></div>
             </div>
             <div class="col-md-6">
                 <div class="play_icon"><a href="#"><img src="/images/play-icon.png" alt="Play icon"></a></div>

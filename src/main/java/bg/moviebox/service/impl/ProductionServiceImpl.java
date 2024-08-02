@@ -12,6 +12,7 @@ import bg.moviebox.service.exception.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -28,7 +29,7 @@ public class ProductionServiceImpl implements ProductionService {
     private final ExchangeRateService exchangeRateService;
 
     public ProductionServiceImpl(@Qualifier("productionsRestClient") RestClient productionRestClient,
-            ProductionRepository productionRepository,
+                                 ProductionRepository productionRepository,
                                  ExchangeRateService exchangeRateService) {
         this.productionRestClient = productionRestClient;
         this.productionRepository = productionRepository;
@@ -37,13 +38,13 @@ public class ProductionServiceImpl implements ProductionService {
 
     @Override
     public void createProduction(AddProductionDTO addProductionDTO) {
-        LOGGER.debug("Creating new production...");
+        LOGGER.info("Creating new production...");
 
-       productionRestClient
-               .post()
-               .uri("http://localhost:8081/productions")
-               .body(addProductionDTO)
-               .retrieve();
+        productionRestClient
+                .post()
+                .uri("http://localhost:8081/productions")
+                .body(addProductionDTO)
+                .retrieve();
     }
 
     @Override
@@ -53,19 +54,33 @@ public class ProductionServiceImpl implements ProductionService {
 
     @Override
     public ProductionDetailsDTO getProductionDetails(Long id) {
-        return this.productionRepository
-                .findById(id)
-                .map(this::toProductionDetailsDTO)
-                .orElseThrow(() -> new ObjectNotFoundException("Production not found!", id));
+        return productionRestClient
+                .get()
+                .uri("http://localhost:8081/productions/{id}", id)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(ProductionDetailsDTO.class);
+//        return this.productionRepository
+//                .findById(id)
+//                .map(this::toProductionDetailsDTO)
+//                .orElseThrow(() -> new ObjectNotFoundException("Production not found!", id));
     }
 
     @Override
     public List<ProductionSummaryDTO> getAllProductionsSummary() {
-        return productionRepository
-                .findAll()
-                .stream()
-                .map(ProductionServiceImpl::toProductionSummary)
-                .toList();
+        LOGGER.info("Get all productions...");
+
+        return productionRestClient
+                .get()
+                .uri("http://localhost:8081/productions")
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(new ParameterizedTypeReference<>(){});
+//        return productionRepository
+//                .findAll()
+//                .stream()
+//                .map(ProductionServiceImpl::toProductionSummary)
+//                .toList();
     }
 
     @Override
@@ -86,6 +101,7 @@ public class ProductionServiceImpl implements ProductionService {
                 .collect(Collectors.toList());
     }
 
+    //delete last 3
     private static ProductionSummaryDTO toProductionSummary(Production production) {
         return new ProductionSummaryDTO(
                 production.getId(),

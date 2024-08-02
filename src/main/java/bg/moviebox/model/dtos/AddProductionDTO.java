@@ -6,8 +6,9 @@ import jakarta.validation.constraints.*;
 
 public record AddProductionDTO(
         Long id,
-        @NotEmpty(message = "{add.production.name.not.empty}")
-        @Size(message = "{add.production.name.length}", min = 1, max = 200) String name,
+        @NotNull(message = "add.production.name.length")
+        @Size(message = "add.production.name.length", min = 1, max = 200)
+        String name,
         @NotEmpty
         String imageUrl,
         @NotEmpty
@@ -15,7 +16,8 @@ public record AddProductionDTO(
         @NotNull
         @Positive
         @Min(value = 1906)
-        @Max(value = 2024) Integer year,
+        @Max(value = 2024)
+        Integer year,
         @NotNull
         @Positive
         Integer length,
@@ -25,8 +27,9 @@ public record AddProductionDTO(
         @PositiveOrZero
         @NotNull
         Integer rentPrice,
-        @NotEmpty(message = "add.description.not.empty")
-        @Size(message = "add.description.length", min = 50, max = 5000) String description,
+        @NotNull(message = "add.production.description.length")
+        @Size(message = "add.production.description.length", min = 50, max = 5000)
+        String description,
         ProductionType productionType,
         Genre genre) {
 
