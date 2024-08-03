@@ -5,9 +5,6 @@ import bg.moviebox.model.enums.ProductionType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Entity
 @Table(name = "productions")
 public class Production extends BaseEntity {
@@ -59,15 +56,15 @@ public class Production extends BaseEntity {
     @Size(min = 50, max = 5000)
     private String description;
 
-    @ManyToMany(mappedBy = "knownForMovies")
-    private Set<Celebrity> celebritiesInTheMovie;
-
-    @ManyToMany(mappedBy = "knownForTvShows")
-    private Set<Celebrity> celebritiesInTheTvShow;
+//    @ManyToMany(mappedBy = "knownForMovies")
+//    private Set<Celebrity> celebritiesInTheMovie;
+//
+//    @ManyToMany(mappedBy = "knownForTvShows")
+//    private Set<Celebrity> celebritiesInTheTvShow;
 
     public Production() {
-        this.celebritiesInTheMovie = new HashSet<>();
-        this.celebritiesInTheTvShow = new HashSet<>();
+//        this.celebritiesInTheMovie = new HashSet<>();
+//        this.celebritiesInTheTvShow = new HashSet<>();
     }
 
     public String getName() {
@@ -160,24 +157,6 @@ public class Production extends BaseEntity {
         return this;
     }
 
-    public Set<Celebrity> getCelebritiesInTheMovie() {
-        return celebritiesInTheMovie;
-    }
-
-    public Production setCelebritiesInTheMovie(Set<Celebrity> celebritiesInTheMovie) {
-        this.celebritiesInTheMovie = celebritiesInTheMovie;
-        return this;
-    }
-
-    public Set<Celebrity> getCelebritiesInTheTvShow() {
-        return celebritiesInTheTvShow;
-    }
-
-    public Production setCelebritiesInTheTvShow(Set<Celebrity> celebritiesInTheTvShow) {
-        this.celebritiesInTheTvShow = celebritiesInTheTvShow;
-        return this;
-    }
-
     @Override
     public String toString() {
         return "Production{" +
@@ -191,8 +170,6 @@ public class Production extends BaseEntity {
                 ", rating=" + rating +
                 ", rentPrice=" + rentPrice +
                 ", description='" + description + '\'' +
-                ", celebritiesInTheMovie=" + celebritiesInTheMovie +
-                ", celebritiesInTheTvShow=" + celebritiesInTheTvShow +
                 '}';
     }
 }

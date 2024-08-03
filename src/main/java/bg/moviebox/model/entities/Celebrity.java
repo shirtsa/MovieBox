@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Entity
 @Table(name = "celebrities")
 public class Celebrity extends BaseEntity {
@@ -25,21 +22,21 @@ public class Celebrity extends BaseEntity {
     @Size(min = 20, max = 5000)
     private String biography;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "celebrities_movie_productions",
-            joinColumns = @JoinColumn(name = "celebrity_id"),
-            inverseJoinColumns = @JoinColumn(name = "movie_id"))
-    private Set<Production> knownForMovies;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "celebrities_tv_productions",
-            joinColumns = @JoinColumn(name = "celebrity_id"),
-            inverseJoinColumns = @JoinColumn(name = "tv_id"))
-    private Set<Production> knownForTvShows;
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "celebrities_movie_productions",
+//            joinColumns = @JoinColumn(name = "celebrity_id"),
+//            inverseJoinColumns = @JoinColumn(name = "movie_id"))
+//    private Set<Production> knownForMovies;
+//
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "celebrities_tv_productions",
+//            joinColumns = @JoinColumn(name = "celebrity_id"),
+//            inverseJoinColumns = @JoinColumn(name = "tv_id"))
+//    private Set<Production> knownForTvShows;
 
     public Celebrity() {
-        this.knownForMovies = new HashSet<>();
-        this.knownForTvShows = new HashSet<>();
+//        this.knownForMovies = new HashSet<>();
+//        this.knownForTvShows = new HashSet<>();
     }
 
     public String getName() {
@@ -66,30 +63,12 @@ public class Celebrity extends BaseEntity {
         this.biography = biography;
     }
 
-    public Set<Production> getKnownForMovies() {
-        return knownForMovies;
-    }
-
-    public void setKnownForMovies(Set<Production> knownForMovies) {
-        this.knownForMovies = knownForMovies;
-    }
-
-    public Set<Production> getKnownForTvShows() {
-        return knownForTvShows;
-    }
-
-    public void setKnownForTvShows(Set<Production> knownForTvShows) {
-        this.knownForTvShows = knownForTvShows;
-    }
-
     @Override
     public String toString() {
         return "Celebrity{" +
                 "name='" + name + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", biography='" + biography + '\'' +
-                ", knownForMovies=" + knownForMovies +
-                ", knownForTvShows=" + knownForTvShows +
                 '}';
     }
 }
