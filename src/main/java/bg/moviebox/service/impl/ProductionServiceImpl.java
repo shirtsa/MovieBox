@@ -59,10 +59,6 @@ public class ProductionServiceImpl implements ProductionService {
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(ProductionDetailsDTO.class);
-//        return this.productionRepository
-//                .findById(id)
-//                .map(this::toProductionDetailsDTO)
-//                .orElseThrow(() -> new ObjectNotFoundException("Production not found!", id));
     }
 
     @Override
@@ -75,11 +71,6 @@ public class ProductionServiceImpl implements ProductionService {
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(new ParameterizedTypeReference<>(){});
-//        return productionRepository
-//                .findAll()
-//                .stream()
-//                .map(ProductionServiceImpl::toProductionSummary)
-//                .toList();
     }
 
     @Override
@@ -100,22 +91,6 @@ public class ProductionServiceImpl implements ProductionService {
                 .collect(Collectors.toList());
     }
 
-    //delete last 3
-    private static ProductionSummaryDTO toProductionSummary(Production production) {
-        return new ProductionSummaryDTO(
-                production.getId(),
-                production.getName(),
-                production.getImageUrl(),
-                production.getVideoUrl(),
-                production.getYear(),
-                production.getLength(),
-                production.getRating(),
-                production.getRentPrice(),
-                production.getDescription(),
-                production.getProductionType(),
-                production.getGenre());
-    }
-
     //Mapped Production entity to ProductionDetails DTO
     private ProductionDetailsDTO toProductionDetailsDTO(Production production) {
         return new ProductionDetailsDTO(
@@ -131,20 +106,5 @@ public class ProductionServiceImpl implements ProductionService {
                 production.getProductionType(),
                 production.getGenre(),
                 exchangeRateService.allSupportedCurrencies());
-    }
-
-    //Mapped Production DTO to production entity
-    private static Production map(AddProductionDTO addProductionDTO) {
-        return new Production()
-                .setName(addProductionDTO.name())
-                .setImageUrl(addProductionDTO.imageUrl())
-                .setGenre(addProductionDTO.genre())
-                .setLength(addProductionDTO.length())
-                .setRating(addProductionDTO.rating())
-                .setRentPrice(addProductionDTO.rentPrice())
-                .setVideoUrl(addProductionDTO.videoUrl())
-                .setYear(addProductionDTO.year())
-                .setDescription(addProductionDTO.description())
-                .setProductionType(addProductionDTO.productionType());
     }
 }
