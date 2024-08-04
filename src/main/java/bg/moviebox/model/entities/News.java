@@ -3,7 +3,10 @@ package bg.moviebox.model.entities;
 import bg.moviebox.model.enums.NewsType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import java.time.Instant;
 
 @Entity
 @Table(name = "news")
@@ -13,6 +16,10 @@ public class News extends BaseEntity {
     @NotEmpty
     @Size(min = 5, max = 100)
     private String name;
+
+    @NotNull
+    @Column
+    private Instant created = Instant.now();
 
     @Column(nullable = false)
     @NotEmpty
@@ -41,6 +48,15 @@ public class News extends BaseEntity {
 
     public News setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public Instant getCreated() {
+        return created;
+    }
+
+    public News setCreated(Instant created) {
+        this.created = created;
         return this;
     }
 

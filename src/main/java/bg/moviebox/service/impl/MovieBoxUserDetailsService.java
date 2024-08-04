@@ -34,6 +34,7 @@ public class MovieBoxUserDetailsService implements UserDetailsService {
 
     return new MovieBoxUserDetails(
         user.getId(),
+        user.getUuid(),
         user.getEmail(),
         user.getPassword(),
         user.getRoles().stream().map(UserRoleEntity::getRoles).map(MovieBoxUserDetailsService::map).toList(),

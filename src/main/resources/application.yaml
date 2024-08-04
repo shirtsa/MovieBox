@@ -16,9 +16,9 @@ spring:
         enabled: 'true'
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    password: 12345
-    username: root
-    url: jdbc:mysql://localhost:3306/moviebox?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: ${MYSQL_USER:}
+    password: ${MYSQL_PASSWORD:}
+    url: jdbc:mysql://${MYSQL_HOST:}:${MYSQL_PORT:}/moviebox?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
   thymeleaf: # Thymeleaf
     cache: false
     mode: HTML
@@ -47,6 +47,12 @@ forex:
     url: "https://openexchangerates.org/api/latest.json?app_id={app_id}"
     base: "USD"
 
+news.retention.period: P30D
+
 productions:
   api:
-    baseUrl: "http://localhost:8081"
+    baseUrl: "${PRODUCTIONS_BASE_URL:http://localhost:8081}"
+
+jwt:
+  secret: ${JWT_KEY:WSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8I}
+  expiration: ${JWT_EXPIRATION:60000}

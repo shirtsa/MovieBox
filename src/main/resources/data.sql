@@ -1,10 +1,14 @@
-# INSERT INTO `users` (id, email, first_name, last_name, password)
-# VALUES (2, 'admin@example', 'admin', 'adminov', '06f964077ec3dbff1a462dc296d2ece4c8044de5cb3929e9c9840ebc132b4083e4b0e092f544b9ce5d185c46f6ed6b39'),
-#        (3, 'user@example', 'user', 'userov', '06f964077ec3dbff1a462dc296d2ece4c8044de5cb3929e9c9840ebc132b4083e4b0e092f544b9ce5d185c46f6ed6b39');
-#
-# INSERT INTO `users_roles` (user_id, role_id)
-# VALUES (1, 1),
-#        (1, 2);
+INSERT INTO `roles`
+VALUES (1, 'USER'), (2, 'ADMIN');
+
+INSERT INTO `users` (id, email, first_name, last_name, password, uuid)
+VALUES (1, 'admin@example', 'big', 'admin', '86e62a5c5765fd9f641bc5bbf18031fcd3a93fae3da80c9247d484e386802b5cf8df9de197e540d857ba97861a7a7e17', '0cae94fa-6a69-415b-b17c-1bbe2e09d294');
+
+
+INSERT INTO `users_roles` (user_id, role_id)
+VALUES (1, 1),
+       (1, 2);
+
 
 INSERT INTO `celebrities` (id, name, image_url, biography)
  VALUES
@@ -37,3 +41,9 @@ VALUES (1, 'Alien: Romulus', 'While scavenging the deep ends of a derelict space
        (10, 'The Office', 'The Office is an American mockumentary sitcom television series based on the 2001–2003 BBC series of the same name created by (and starring) Ricky Gervais and Stephen Merchant. Adapted for NBC by Greg Daniels, a veteran writer for Saturday Night Live, King of the Hill, and The Simpsons.', 'COMEDY', 'https://ntvb.tmsimg.com/assets/p7893514_b_h8_ab.jpg?w=960&h=540', '22', 'TV', '3', '5', 'tNcDHWpselE', '2005'),
        (11, 'Black Mirror', 'Black Mirror is a British anthology television series created by Charlie Brooker. The series explores various genres, with most episodes set in near-future dystopias containing sci-fi technology—a type of speculative fiction. The series is inspired by The Twilight Zone and uses the themes of technology and media to comment on contemporary social issues.', 'THRILLER', 'https://images.justwatch.com/poster/307079555/s332/season-6', '60', 'TV', '4', '9', 'V0XOApF5nLU', '2011'),
        (12, 'House', 'House (also called House, M.D.) is an American medical drama television series that originally ran on the Fox network for eight seasons, from November 16, 2004, to May 21, 2012. Its main character, Dr. Gregory House (Hugh Laurie), is an unconventional, misanthropic, cynical medical genius who, despite his dependence on pain medication, leads a team of diagnosticians at the fictional Princeton–Plainsboro Teaching Hospital (PPTH) in New Jersey.', 'DRAMA', 'https://pics.filmaffinity.com/house_m_d-469252061-large.jpg', '45', 'TV', '5', '3', 'MczMB8nU1sY', '2004');
+
+
+
+
+
+

@@ -4,13 +4,22 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import static org.hibernate.type.SqlTypes.VARCHAR;
 
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
+
+    @UuidGenerator
+    @JdbcTypeCode(VARCHAR)
+    private UUID uuid;
 
     @Column(nullable = false, unique = true)
     @Email
@@ -40,6 +49,15 @@ public class User extends BaseEntity {
 
     public User() {
         this.roles = new ArrayList<>();
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public User setUuid(UUID uuid) {
+        this.uuid = uuid;
+        return this;
     }
 
     public String getEmail() {

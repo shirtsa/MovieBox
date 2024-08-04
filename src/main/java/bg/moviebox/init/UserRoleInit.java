@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Component
+//@Component
 public class UserRoleInit implements CommandLineRunner {
 
     private final UserRoleRepository userRoleRepository;

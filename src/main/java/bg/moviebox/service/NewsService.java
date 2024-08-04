@@ -8,4 +8,6 @@ public interface NewsService {
 
     void deleteNews(Long newsId);
 
+    void cleanupOldNews();
+
 }
