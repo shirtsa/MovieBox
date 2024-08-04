@@ -26,7 +26,7 @@ public class News extends BaseEntity {
     @NotEmpty
     private String trailerUrl;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false)
     @NotEmpty
     @Size(min = 50, max = 5000)
     private String description;

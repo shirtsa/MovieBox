@@ -2,6 +2,7 @@ package bg.moviebox.model.entities;
 
 import bg.moviebox.model.enums.Genre;
 import bg.moviebox.model.enums.ProductionType;
+import bg.moviebox.service.annotation.YearConstraint;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -32,8 +33,7 @@ public class Production extends BaseEntity {
 
     @Column(nullable = false)
     @NotNull
-    @Min(value = 1906)
-    @Max(value = 2024)
+    @YearConstraint
     private Integer year;
 
     @Column(nullable = false)
@@ -51,7 +51,7 @@ public class Production extends BaseEntity {
     @NotNull
     private Integer rentPrice;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false)
     @NotEmpty
     @Size(min = 50, max = 5000)
     private String description;

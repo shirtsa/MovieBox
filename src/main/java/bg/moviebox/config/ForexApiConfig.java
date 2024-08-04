@@ -50,8 +50,6 @@ public class ForexApiConfig {
       throw new IllegalStateException("Sorry, but the free API does not support base, "
           + "currencies different than USD.");
     }
-
-
   }
 
   private static void verifyNotNullOrEmpty(String name, String value) {

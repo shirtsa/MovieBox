@@ -4,7 +4,7 @@ import bg.moviebox.service.ExchangeRateService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class ExchangeRateInitializer implements CommandLineRunner {
 
   private final ExchangeRateService exRateService;
