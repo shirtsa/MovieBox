@@ -35,7 +35,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/celebrities/all" th:classappend="${activeLink == 'celebrities'}? 'active'">
+                <a class="nav-link" href="/celebrities/all" th:classappend="${activeLink == '/celebrities/all'}? 'active'">
                     <span th:text="#{nav_bar_celebs}">Celebs</span>
                 </a>
             </li>
@@ -55,6 +55,12 @@
             <a href="/celebrities/add" th:classappend="${activeLink == '/celebrities/add'}? 'active'">
                 <img src="/images/celebs-add-btn.png" alt="Add Celebrity icon">
                 <span th:text="#{nav_bar_add_celebrity}">Add Celebrity</span>
+            </a>
+        </div>
+        <div class="search_icon">
+            <a href="/news/add" th:classappend="${activeLink == '/news/add'}? 'active'">
+                <img src="/images/world-news.png" alt="Add News icon">
+                <span th:text="#{nav_bar_add_news}">Add News</span>
             </a>
         </div>
         <div class="search_icon">

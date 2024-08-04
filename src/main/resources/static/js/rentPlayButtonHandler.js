@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add event listener to update rent price when currency changes
     currencySelect.addEventListener('change', () => {
-        updateRentPrice().catch(console.error); // Handle any potential errors from updateRentPrice
+        updateRentPrice().catch(console.error);
     });
 
     // Add event listener for button click
@@ -51,12 +51,14 @@ document.addEventListener('DOMContentLoaded', function () {
             currencySelect.style.display = 'none'; // Hide dropdown in Play state
             isRent = false;
         } else {
+            // const movieId = rentPlayButton.getAttribute('data-movie-id');  // Ensure this attribute is set
+            // window.location.href = `/productions/video/${movieId}`;
+
             // Redirect to video URL
             window.location.href = rentPlayButton.getAttribute('href');
         }
     });
 
-    // Initialize the rent price on page load
-    updateRentPrice().catch(console.error); // Handle any potential errors from updateRentPrice
+    updateRentPrice().catch(console.error);
 });
 

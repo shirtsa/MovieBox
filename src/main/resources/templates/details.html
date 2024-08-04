@@ -15,7 +15,7 @@
         </div>
         <div class="production-details-button">
             <div class="details-rent-btn btn-common">
-                <a id="rentPlayButton" data-rent-price="*{rentPrice}" th:href="*{videoUrl}">
+                <a id="rentPlayButton" data-rent-price="*{rentPrice}" th:href="*{'https://www.youtube.com/embed/' + videoUrl()}">
                     <img id="rentIcon" src="/images/rent-btn.png" alt="Rent icon">
                     <img id="playIcon" src="/images/play-btn.png" alt="Play icon" style="display: none;">
                     <span id="rentPlayText" th:text="'Rent ' + *{rentPrice}">Rent</span>

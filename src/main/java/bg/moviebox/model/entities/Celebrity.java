@@ -10,7 +10,7 @@ public class Celebrity extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     @NotEmpty
-    @Size(min = 2)
+    @Size(min = 2, max = 100)
     private String name;
 
     @Column(nullable = false)
@@ -43,24 +43,27 @@ public class Celebrity extends BaseEntity {
         return name;
     }
 
-    public void setName(String fullName) {
-        this.name = fullName;
+    public Celebrity setName(String name) {
+        this.name = name;
+        return this;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public Celebrity setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
     }
 
     public String getBiography() {
         return biography;
     }
 
-    public void setBiography(String biography) {
+    public Celebrity setBiography(String biography) {
         this.biography = biography;
+        return this;
     }
 
     @Override

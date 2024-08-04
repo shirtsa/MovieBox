@@ -29,8 +29,8 @@ public class User extends BaseEntity {
     @NotEmpty
     private String lastName;
 
-    @Column
-    private boolean active;
+//    @Column
+//    private boolean active;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
@@ -46,48 +46,45 @@ public class User extends BaseEntity {
         return email;
     }
 
-    public void setEmail(String email) {
+    public User setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public User setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public User setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
+        return this;
     }
 
     public List<UserRoleEntity> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<UserRoleEntity> userRoles) {
-        this.roles = userRoles;
+    public User setRoles(List<UserRoleEntity> roles) {
+        this.roles = roles;
+        return this;
     }
 
     @Override
@@ -97,7 +94,6 @@ public class User extends BaseEntity {
                 ", password='" + (password == null ? "N/A" : "[PROVIDED]") + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", active=" + active +
                 ", roles=" + roles +
                 '}';
     }

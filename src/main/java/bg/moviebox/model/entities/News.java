@@ -1,26 +1,38 @@
 package bg.moviebox.model.entities;
 
 import bg.moviebox.model.enums.NewsType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "news")
 public class News extends BaseEntity {
 
+    @Column(nullable = false, unique = true)
+    @NotEmpty
+    @Size(min = 5, max = 100)
     private String name;
 
+    @Column(nullable = false)
+    @NotEmpty
     private String firstImageUrl;
 
+    @Column(nullable = false)
+    @NotEmpty
     private String secondImageUrl;
 
+    @Column(nullable = false)
+    @NotEmpty
     private String trailerUrl;
 
+    @Column(nullable = false, columnDefinition = "TEXT")
+    @NotEmpty
+    @Size(min = 50, max = 5000)
     private String description;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private NewsType newsType;
 
     public String getName() {

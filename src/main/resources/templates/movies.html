@@ -19,7 +19,7 @@
                             <img th:src="*{imageUrl}" class="image" alt="Image">
                             <div class="middle">
                                 <div class="playnow_bt">
-                                    <a th:href="*{videoUrl}" th:text="#{movies_play_btn}">Play Now</a>
+                                    <a th:href="*{videoUrl}" th:text="#{movie_box_play_btn}">Play Now</a>
                                 </div>
                             </div>
                         </div>
@@ -34,14 +34,14 @@
                                 <li><a href="#"><img src="/images/star-icon.png"></a></li>
                             </ul>
                             <div class="card-body">
-                                <a class="card-link" th:href="@{/productions/{id}(id=*{id})}" th:text="#{movies_details_btn}">Details</a>
+                                <a class="card-link" th:href="@{/productions/{id}(id=*{id})}" th:text="#{movie_box_details_btn}">Details</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <button id="see-more-button" class="see-more" th:text="#{movies_see_more_btn}">See More</button>
+        <button id="see-more-button" class="see-more" th:text="#{movie_box_see_more_btn}">See More</button>
     </div>
 </div>
 <script th:src="@{/js/seeMoreButtonHandler.js}"></script>
