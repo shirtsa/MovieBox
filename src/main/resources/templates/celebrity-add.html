@@ -13,23 +13,23 @@
               th:object="${addCelebrityDTO}"
               class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
             <div class="row">
-
                 <!-- Celebrity name -->
                 <div class="form-group col-md-6 mb-3">
-                    <label class="text-center text-white font-weight-bold" for="name">Celebrity name</label>
-                    <input type="text" class="form-control" id="name"
+                    <label class="text-center text-white font-weight-bold" th:for="name">Celebrity name</label>
+                    <input type="text"
+                           id="name"
+                           class="form-control"
                            th:field="*{name}"
-                           th:errorclass="bg-danger"/>
-                    <p class="invalid-feedback errors alert alert-danger">
-                        Celebrity name is required.
-                    </p>
+                           th:errorclass="is-invalid"
+                           placeholder="Celebrity name"/>
+                    <small th:each="error : ${#fields.errors('name')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
+                    <!--                    <small th:if="${#fields.errors('name')}" th:errors="*{name}" class="invalid-feedback errors alert alert-danger"></small>-->
                 </div>
                 <!-- EO: Celebrity name -->
             </div>
-
             <div class="row"></div>
             <div class="row"></div>
-
             <!-- Biography -->
             <div class="form-group">
                 <label class="text-white font-weight-bold" th:for="biography">Biography</label>
@@ -41,26 +41,23 @@
                           rows="3"
                           placeholder="Biography">
                 </textarea>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Biography is required.
-                </p>
+                <small th:each="error : ${#fields.errors('biography')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
             </div>
             <!-- EO: Biography -->
-
             <!-- Image URL -->
             <div class="form-group">
-                <label class="text-white font-weight-bold" for="imageUrl">Celebrity Image URL</label>
+                <label class="text-white font-weight-bold" th:for="imageUrl">Celebrity Image URL</label>
                 <input id="imageUrl"
                        th:field="*{imageUrl}"
                        th:errorclass="is-invalid"
-                       type="url" class="form-control"
+                       type="url"
+                       class="form-control"
                        placeholder="Put celebrity image URL here">
-                <p class="invalid-feedback errors alert alert-danger">
-                    Celebrity image URL is required.
-                </p>
+                <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
+                       class="invalid-feedback errors alert alert-danger"></small>
             </div>
             <!-- EO: Image URL -->
-
             <div class="row">
                 <div class="col col-md-4">
                     <div class="button-holder d-flex">

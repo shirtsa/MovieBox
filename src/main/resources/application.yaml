@@ -47,7 +47,9 @@ forex:
     url: "https://openexchangerates.org/api/latest.json?app_id={app_id}"
     base: "USD"
 
-news.retention.period: P30D
+news:
+  retention:
+    period: P30D
 
 productions:
   api:

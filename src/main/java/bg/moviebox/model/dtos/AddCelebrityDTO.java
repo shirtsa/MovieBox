@@ -7,11 +7,11 @@ import jakarta.validation.constraints.Size;
 public record AddCelebrityDTO(
         Long id,
 
-        @NotNull(message = "{add.celebrity.name.length}")
+        @NotEmpty(message = "{add.celebrity.name.length}")
         @Size(message = "{add.celebrity.name.length}", min = 1, max = 200)
         String name,
 
-        @NotEmpty
+        @NotEmpty(message = "{empty_field_message}")
         String imageUrl,
 
         @NotNull(message = "{add.celebrity.biography.length}")

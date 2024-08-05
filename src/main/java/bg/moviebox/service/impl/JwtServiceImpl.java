@@ -1,6 +1,7 @@
 package bg.moviebox.service.impl;
 
 import bg.moviebox.service.JwtService;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -42,6 +43,23 @@ public class JwtServiceImpl implements JwtService {
         .setExpiration(new Date(now.getTime() + expiration))
         .signWith(getSigningKey(), SignatureAlgorithm.HS256)
         .compact();
+  }
+
+  @Override
+  public Claims parseClaims(String token) {
+    return Jwts
+            .parserBuilder()
+            .setSigningKey(getSigningKey())
+            .build()
+            .parseClaimsJws(token)
+            .getBody();
+  }
+
+  @Override
+  public boolean isTokenExpired(String token) {
+    Claims claims = parseClaims(token);
+    Date expirationDate = claims.getExpiration();
+    return expirationDate.before(new Date());
   }
 
   private Key getSigningKey() {

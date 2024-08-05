@@ -13,7 +13,6 @@
               th:object="${addProductionDTO}"
               class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
             <div class="row">
-                <!-- Production name -->
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-center text-white font-weight-bold" th:for="name">Production Name</label>
                     <input id="name"
@@ -22,10 +21,10 @@
                            type="text"
                            class="form-control"
                            placeholder="Production name"/>
-                    <small th:each="error : ${#fields.errors('name')}" th:text="${error}" class="text-danger"></small>
+                    <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                           class="invalid-feedback errors alert alert-danger"></small>
+                    <!--                    <small th:each="error : ${#fields.errors('name')}" th:text="${error}" class="invalid-feedback errors alert alert-danger"></small>-->
                 </div>
-                <!-- EO: Production name -->
-                <!-- Length -->
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-center text-white font-weight-bold" th:for="length">Length</label>
                     <input id="length"
@@ -34,14 +33,11 @@
                            type="number"
                            class="form-control"
                            placeholder="Production length"/>
-                    <p class="invalid-feedback errors alert alert-danger">
-                        Production length is required.
-                    </p>
+                    <small th:each="error : ${#fields.errors('length')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
                 </div>
-                <!-- EO: Length -->
             </div>
             <div class="row">
-                <!-- Production -->
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-center text-white font-weight-bold" th:for="productionType">Production
                         type</label>
@@ -56,12 +52,9 @@
                                 th:value="${type}">
                         </option>
                     </select>
-                    <p class="invalid-feedback errors alert alert-danger">
-                        Production type is required.
-                    </p>
+                    <small th:each="error : ${#fields.errors('productionType')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
                 </div>
-                <!-- EO: Production -->
-                <!-- Genre -->
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-center text-white font-weight-bold" th:for="genre">Genre</label>
                     <select id="genre"
@@ -74,14 +67,11 @@
                                 th:value="${type}">
                         </option>
                     </select>
-                    <p class="invalid-feedback errors alert alert-danger">
-                        Genre type is required.
-                    </p>
+                    <small th:each="error : ${#fields.errors('genre')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
                 </div>
-                <!-- EO: Genre -->
             </div>
             <div class="row">
-                <!-- Year -->
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-white font-weight-bold" th:for="year">Year</label>
                     <input id="year"
@@ -90,12 +80,9 @@
                            type="number" min="1906" max="2024" step="1"
                            class="form-control"
                            placeholder="Released year"/>
-                    <p class="invalid-feedback errors alert alert-danger">
-                        Released year is required and should be at least 1906.
-                    </p>
+                    <small th:each="error : ${#fields.errors('year')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
                 </div>
-                <!-- EO: Year -->
-                <!-- Rating -->
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-white font-weight-bold" th:for="rating">Rating</label>
                     <input id="rating"
@@ -104,18 +91,15 @@
                            type="number"
                            class="form-control"
                            placeholder="Production rating"/>
-                    <!--                    <p if="${#fields.hasErrors('rating')}"-->
-                    <!--                       class="errors alert alert-danger"-->
-                    <!--                       errors="*{rating}">-->
-                    <!--                    </p>-->
-                    <p class="invalid-feedback errors alert alert-danger">
-                        Select rating zero for default.
-                    </p>
+                    <!--                                        <p if="${#fields.hasErrors('rating')}"-->
+                    <!--                                           class="errors alert alert-danger"-->
+                    <!--                                           errors="*{rating}">-->
+                    <!--                                        </p>-->
+                    <small th:each="error : ${#fields.errors('rating')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
                 </div>
-                <!-- EO: Rating -->
             </div>
             <div class="row">
-                <!-- Rent price -->
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-white font-weight-bold" th:for="rentPrice">Rent Price (BGN)</label>
                     <input id="rentPrice"
@@ -124,11 +108,9 @@
                            type="number" min="0"
                            class="form-control"
                            placeholder="Rent price in BGN"/>
-                    <p class="invalid-feedback errors alert alert-danger">
-                        Rent price is required.
-                    </p>
+                    <small th:each="error : ${#fields.errors('rentPrice')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
                 </div>
-                <!-- EO: Rent price -->
             </div>
             <div class="form-group">
                 <label class="text-white font-weight-bold" th:for="description">Description</label>
@@ -140,9 +122,9 @@
                         rows="3"
                         placeholder="Description">
                     </textarea>
-                <small th:each="error : ${#fields.errors('description')}" th:text="${error}" class="text-danger"></small>
+                <small th:each="error : ${#fields.errors('description')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
             </div>
-            <!-- Image URL -->
             <div class="form-group">
                 <label class="text-white font-weight-bold" th:for="imageUrl">Image URL</label>
                 <input id="imageUrl"
@@ -150,12 +132,9 @@
                        th:errorclass="is-invalid"
                        type="url" class="form-control"
                        placeholder="Put production image URL here">
-                <p class="invalid-feedback errors alert alert-danger">
-                    Production image URL is required.
-                </p>
+                <small th:each="error : ${#fields.errors('imageUrl')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
             </div>
-            <!-- EO: Image URL -->
-            <!-- Trailer URL -->
             <div class="form-group">
                 <label class="text-white font-weight-bold" th:for="videoUrl">Video URL</label>
                 <input id="videoUrl"
@@ -163,11 +142,9 @@
                        th:errorclass="is-invalid"
                        type="url" class="form-control"
                        placeholder="Put production video URL here">
-                <p class="invalid-feedback errors alert alert-danger">
-                    Production video URL is required.
-                </p>
+                <small th:each="error : ${#fields.errors('videoUrl')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
             </div>
-            <!-- EO: Trailer URL -->
             <div class="row">
                 <div class="col col-md-4">
                     <div class="button-holder d-flex">

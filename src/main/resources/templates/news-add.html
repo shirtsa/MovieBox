@@ -21,7 +21,8 @@
                            type="text"
                            class="form-control"
                            placeholder="News name"/>
-                    <small th:each="error : ${#fields.errors('name')}" th:text="${error}" class="text-danger"></small>
+                    <small th:each="error : ${#fields.errors('name')}" th:text="${error}"
+                           class="invalid-feedback errors alert alert-danger"></small>
                 </div>
                 <div class="form-group col-md-6 mb-3">
                     <label class="text-center text-white font-weight-bold" th:for="newsType">News type</label>
@@ -36,9 +37,7 @@
                                 th:value="${type}">
                         </option>
                     </select>
-                    <p class="invalid-feedback errors alert alert-danger">
-                        News type is required.
-                    </p>
+                    <small th:each="error : ${#fields.errors('newsType')}" th:text="${error}" class="invalid-feedback errors alert alert-danger"></small>
                 </div>
             </div>
             <div class="form-group">
@@ -48,9 +47,8 @@
                        th:errorclass="is-invalid"
                        type="url" class="form-control"
                        placeholder="Put news image URL here">
-                <p class="invalid-feedback errors alert alert-danger">
-                    News image URL is required.
-                </p>
+                <small th:each="error : ${#fields.errors('firstImageUrl')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
             </div>
             <div class="form-group">
                 <label class="text-white font-weight-bold" th:for="secondImageUrl">Image URL</label>
@@ -59,9 +57,8 @@
                        th:errorclass="is-invalid"
                        type="url" class="form-control"
                        placeholder="Put news image URL here">
-                <p class="invalid-feedback errors alert alert-danger">
-                    News image URL is required.
-                </p>
+                <small th:each="error : ${#fields.errors('secondImageUrl')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
             </div>
             <div class="form-group">
                 <label class="text-white font-weight-bold" th:for="trailerUrl">Video URL</label>
@@ -70,9 +67,8 @@
                        th:errorclass="is-invalid"
                        type="url" class="form-control"
                        placeholder="Put news trailer URL here">
-                <p class="invalid-feedback errors alert alert-danger">
-                    News trailer URL is required.
-                </p>
+                <small th:each="error : ${#fields.errors('trailerUrl')}" th:text="${error}"
+                       class="invalid-feedback errors alert alert-danger"></small>
             </div>
             <div class="form-group">
                 <label class="text-white font-weight-bold" th:for="description">Description</label>
@@ -85,7 +81,7 @@
                         placeholder="Description">
                     </textarea>
                 <small th:each="error : ${#fields.errors('description')}" th:text="${error}"
-                       class="text-danger"></small>
+                       class="invalid-feedback errors alert alert-danger"></small>
             </div>
             <div class="row">
                 <div class="col col-md-4">

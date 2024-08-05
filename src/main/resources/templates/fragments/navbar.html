@@ -51,19 +51,19 @@
                 <span th:text="#{nav_bar_add_productions}">Add Production</span>
             </a>
         </div>
-        <div class="search_icon">
+        <div class="search_icon" sec:authorize="hasRole('ADMIN')">
             <a href="/celebrities/add" th:classappend="${activeLink == '/celebrities/add'}? 'active'">
                 <img src="/images/celebs-add-btn.png" alt="Add Celebrity icon">
                 <span th:text="#{nav_bar_add_celebrity}">Add Celebrity</span>
             </a>
         </div>
-        <div class="search_icon">
+        <div class="search_icon" sec:authorize="hasRole('ADMIN')">
             <a href="/news/add" th:classappend="${activeLink == '/news/add'}? 'active'">
                 <img src="/images/world-news.png" alt="Add News icon">
                 <span th:text="#{nav_bar_add_news}">Add News</span>
             </a>
         </div>
-        <div class="search_icon">
+        <div class="search_icon" sec:authorize="isAuthenticated()">
             <a href="/productions/list" th:classappend="${activeLink == '/productions/list'}? 'active'">
                 <img src="/images/my-playlist-btn.png" alt="Watchlist icon">
                 <span th:text="#{nav_bar_my_list}">My list</span>

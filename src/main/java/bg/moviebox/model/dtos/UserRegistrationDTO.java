@@ -1,27 +1,25 @@
 package bg.moviebox.model.dtos;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class UserRegistrationDTO {
 
-    @NotNull
-    @Email
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format!")
     private String email;
 
-    @NotEmpty
-    @Size(min = 2, max = 20)
+    @NotEmpty(message = "First Name is required")
+    @Size(min = 2, max = 20, message = "Size must be between 2 and 20 symbols!")
     private String firstName;
 
-    @NotEmpty
-    @Size(min = 2, max = 20)
+    @NotEmpty(message = "Last Name is required")
+    @Size(min = 2, max = 20, message = "Size must be between 2 and 20 symbols!")
     private String lastName;
 
-    @NotEmpty
+    @NotEmpty(message = "{empty_field_message}")
     private String password;
 
+    @NotBlank(message = "Confirm Password is required!")
     private String confirmPassword;
 
     public String getEmail() {
