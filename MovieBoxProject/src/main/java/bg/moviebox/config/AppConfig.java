@@ -29,10 +29,5 @@ public class AppConfig {
 
     return initializer;
   }
-  @PostConstruct
-  public void logEnvironmentVariables() {
-    System.out.println("JWT Secret: " + System.getenv("JWT_KEY"));
-    System.out.println("JWT Expiration: " + System.getenv("JWT_EXPIRATION"));
-  }
 
 }

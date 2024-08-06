@@ -9,20 +9,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-//@Component
+@Component
 public class JwtUtil {
 
-    @Value("${jwt.secret}")
-    private String secret;
+//    @Value("${jwt.secret}")
+    private String secret = "WSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8I";
 
-    @Value("${jwt.expiration}")
-    private long expiration;
+//    @Value("${jwt.expiration}")
+    private long expiration = 60000;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -35,7 +36,11 @@ public class JwtUtil {
                 .parseClaimsJws(token)
                 .getBody();
 
-        return Arrays.stream(claims.get("roles", String.class).split(","))
+        // Extract the roles claim as a List
+        List<String> roles = claims.get("roles", ArrayList.class);
+
+        // Map roles to SimpleGrantedAuthority
+        return roles.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
