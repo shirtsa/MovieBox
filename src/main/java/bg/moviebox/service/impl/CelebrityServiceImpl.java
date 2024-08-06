@@ -31,7 +31,6 @@ public class CelebrityServiceImpl implements CelebrityService {
                 .findById(id)
                 .map(this::toCelebrityDetailsDTO)
                 .orElseThrow(() -> new ObjectNotFoundException("Celebrity not found!", id));
-
     }
 
     @Override

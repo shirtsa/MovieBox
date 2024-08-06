@@ -53,10 +53,23 @@ public class NewsController {
         return "redirect:/";
     }
 
+    @GetMapping("/{id}")
+    public String newsDetails(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("newsDetails", newsService.getNewsDetails(id));
+        return "news-details";
+    }
+
     @DeleteMapping("/{id}")
     public String deleteNews(@PathVariable("id") Long id) {
         newsService.deleteNews(id);
         return "redirect:/news/all";
+    }
+
+    @GetMapping("/all")
+    public String getAllNews(Model model) {
+
+        model.addAttribute("allNews", newsService.getAllNewsSummary());
+        return "/news";
     }
 
 //    @GetMapping("/coming-soon")

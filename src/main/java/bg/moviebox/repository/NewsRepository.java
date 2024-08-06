@@ -1,5 +1,6 @@
 package bg.moviebox.repository;
 
+import bg.moviebox.model.dtos.NewsSummaryDTO;
 import bg.moviebox.model.entities.News;
 import bg.moviebox.model.enums.NewsType;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,7 +20,7 @@ public interface NewsRepository extends JpaRepository<News, Long> {
     @Query("DELETE FROM News n WHERE n.created < :olderThan")
     void deleteOldNews(Instant olderThan);
 
-    List<News> findByNewsType(NewsType newsType);
+    List<NewsSummaryDTO> findByNewsTypeOrderByIdDesc(NewsType newsType);
 
     News findFirstByNewsType(NewsType newsType);
 

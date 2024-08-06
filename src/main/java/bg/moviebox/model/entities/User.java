@@ -1,5 +1,6 @@
 package bg.moviebox.model.entities;
 
+import bg.moviebox.model.enums.UserRoleEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -7,9 +8,7 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static org.hibernate.type.SqlTypes.VARCHAR;
 
@@ -47,8 +46,16 @@ public class User extends BaseEntity {
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<UserRoleEntity> roles;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_playlist",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "production_id"))
+    private Set<Production> playlist;
+
     public User() {
         this.roles = new ArrayList<>();
+        this.playlist = new HashSet<>();
     }
 
     public UUID getUuid() {
@@ -105,14 +112,25 @@ public class User extends BaseEntity {
         return this;
     }
 
+    public Set<Production> getPlaylist() {
+        return playlist;
+    }
+
+    public User setPlaylist(Set<Production> playlist) {
+        this.playlist = playlist;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "email='" + email + '\'' +
-                ", password='" + (password == null ? "N/A" : "[PROVIDED]") + '\'' +
+                "uuid=" + uuid +
+                ", email='" + email + '\'' +
+                ", password='" + password + (password == null ? "N/A" : "[PROVIDED]") +'\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", roles=" + roles +
+                ", playlist=" + playlist +
                 '}';
     }
 }

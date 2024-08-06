@@ -10,7 +10,8 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="banner_title">
-                    <h5 class="text-center text-white mt-5" th:text="#{banner_title_welcome_text}">Welcome to MovieBox,
+                    <h5 class="text-center text-white mt-5">
+                        <th:block th:text="#{welcome}"></th:block>
                         <th:block th:text="${welcomeMessage}"></th:block>
                     </h5>
                 </div>
@@ -293,7 +294,6 @@
 <div class="coming_section layout_padding">
     <div class="container">
         <div class="row">
-<!--            th:if="${latestNews}"-->
             <div class="col-md-6">
                 <div class="image_17">
                     <div class="image_17">
@@ -306,7 +306,7 @@
                 <h1 class="Coming_soon_title" >Coming soon</h1>
                 <p class="long_text_1">Text</p>
 <!--                th:text="${#strings.abbreviate(latestNews.description, 100)}"-->
-                <div class="play_bt"><a>See Trailer</a></div>
+                <div class="play_bt"><a href="#">See Trailer</a></div>
             </div>
         </div>
     </div>

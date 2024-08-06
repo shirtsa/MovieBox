@@ -64,7 +64,7 @@
             </a>
         </div>
         <div class="search_icon" sec:authorize="isAuthenticated()">
-            <a href="/productions/list" th:classappend="${activeLink == '/productions/list'}? 'active'">
+            <a href="/playlist" th:classappend="${activeLink == '/playlist'}? 'active'">
                 <img src="/images/my-playlist-btn.png" alt="Watchlist icon">
                 <span th:text="#{nav_bar_my_list}">My list</span>
             </a>

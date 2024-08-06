@@ -5,6 +5,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +21,16 @@ public class JwtServiceImpl implements JwtService {
   private final String jwtSecret;
   private final long expiration;
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(JwtServiceImpl.class);
+
   public JwtServiceImpl(@Value("${jwt.secret}") String jwtSecret,
                         @Value("${jwt.expiration}") long expiration) {
     this.jwtSecret = jwtSecret;
     this.expiration = expiration;
   }
+
+//   LOGGER>("JWT Secret: {}", jwtSecret);.
+//    logger.info("JWT Expiration: {}", expiration);
 
   @Override
   public String generateToken(String userId, Map<String, Object> claims) {

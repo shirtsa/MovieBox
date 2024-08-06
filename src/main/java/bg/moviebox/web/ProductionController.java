@@ -66,7 +66,8 @@ public class ProductionController {
     @GetMapping("/all")
     public String getAllProductions(Model model) {
 
-        model.addAttribute("allProductions", productionService.getAllProductionsSummary());
+        model.addAttribute("allProductions",
+                productionService.getAllProductionsSummary());
 
         return "/productions";
     }
@@ -74,7 +75,8 @@ public class ProductionController {
     @GetMapping("/movies")
     public String movies(Model model) {
 
-        model.addAttribute("allMovieProductions", productionService.getAllMovieProductions());
+        model.addAttribute("allMovieProductions",
+                productionService.getAllMovieProductions());
 
         return "/movies";
     }
@@ -82,20 +84,9 @@ public class ProductionController {
     @GetMapping("/tv")
     public String tv(Model model) {
 
-        model.addAttribute("allTvProductions", productionService.getAllTvProductions());
+        model.addAttribute("allTvProductions",
+                productionService.getAllTvProductions());
 
         return "/tv";
     }
-
-    @GetMapping("/list")
-    public String myList(Model model) {
-
-        // TODO my list from current logged user!
-        model.addAttribute("myList");
-
-        return "my-list";
-    }
-
-
-
 }

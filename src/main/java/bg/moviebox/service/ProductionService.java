@@ -3,7 +3,6 @@ package bg.moviebox.service;
 import bg.moviebox.model.dtos.AddProductionDTO;
 import bg.moviebox.model.dtos.ProductionDetailsDTO;
 import bg.moviebox.model.dtos.ProductionSummaryDTO;
-import bg.moviebox.model.enums.ProductionType;
 
 import java.util.List;
 

@@ -1,10 +1,13 @@
 package bg.moviebox.service.impl;
 
 import bg.moviebox.model.dtos.AddNewsDTO;
+import bg.moviebox.model.dtos.NewsDetailsDTO;
+import bg.moviebox.model.dtos.NewsSummaryDTO;
 import bg.moviebox.model.entities.News;
 import bg.moviebox.model.enums.NewsType;
 import bg.moviebox.repository.NewsRepository;
 import bg.moviebox.service.NewsService;
+import bg.moviebox.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.Period;
-import java.util.Comparator;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Stream;
 
 @Service
 public class NewsServiceImpl implements NewsService {
@@ -53,6 +53,55 @@ public class NewsServiceImpl implements NewsService {
         LOGGER.info("Old news were removed");
     }
 
+    @Override
+    public List<NewsSummaryDTO> getAllNewsSummary() {
+        return newsRepository
+                .findAll()
+                .stream()
+                .map(NewsServiceImpl::toNewsSummary)
+                .toList();
+    }
+
+    @Override
+    public NewsDetailsDTO getNewsDetails(Long id) {
+        return this.newsRepository
+                .findById(id)
+                .map(this::toNewsDetailsDTO)
+                .orElseThrow(() -> new ObjectNotFoundException("News not found!", id));
+    }
+
+    @Override
+    public List<NewsSummaryDTO> getNewsWithNewsTypeComingSoon() {
+        return newsRepository
+                .findByNewsTypeOrderByIdDesc(NewsType.COMING_SOON)
+                .stream().limit(1)
+                .toList();
+    }
+
+    private static NewsSummaryDTO toNewsSummary(News news) {
+        return new NewsSummaryDTO(
+                news.getId(),
+                news.getName(),
+                news.getCreated(),
+                news.getFirstImageUrl(),
+                news.getSecondImageUrl(),
+                news.getTrailerUrl(),
+                news.getDescription(),
+                news.getNewsType()
+        );
+    }
+
+    private NewsDetailsDTO toNewsDetailsDTO(News news) {
+        return new NewsDetailsDTO(
+                news.getId(),
+                news.getName(),
+                news.getCreated(),
+                news.getFirstImageUrl(),
+                news.getSecondImageUrl(),
+                news.getTrailerUrl(),
+                news.getDescription(),
+                news.getNewsType());
+    }
 
     private News map(AddNewsDTO addNewsDTO) {
         return modelMapper.map(addNewsDTO, News.class);

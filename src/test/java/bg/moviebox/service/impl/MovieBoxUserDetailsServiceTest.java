@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.mockito.Mockito.when;
 
@@ -24,7 +25,7 @@ import static org.mockito.Mockito.when;
 class MovieBoxUserDetailsServiceTest {
 
   private static final String TEST_EMAIL = "user@example.com";
-  private static final String NOT_EXISTENT_EMAIL = "none@example.com";
+  private static final String NOT_EXISTENT_EMAIL = "empty@example.com";
 
   private MovieBoxUserDetailsService toTest;
   @Mock
@@ -45,8 +46,8 @@ class MovieBoxUserDetailsServiceTest {
         .setFirstName("Gosho")
         .setLastName("Ivanov")
         .setRoles(List.of(
-            new UserRoleEntity().setRoles(UserRoleEnum.ADMIN),
-            new UserRoleEntity().setRoles(UserRoleEnum.USER)
+            new UserRoleEntity().setRoles(UserRoleEnum.USER),
+            new UserRoleEntity().setRoles(UserRoleEnum.ADMIN)
         ));
 
     when(mockUserRepository.findByEmail(TEST_EMAIL))
@@ -67,8 +68,8 @@ class MovieBoxUserDetailsServiceTest {
     Assertions.assertEquals(testUser.getFirstName() + " " + testUser.getLastName(),
         movieBoxUserDetails.getFullName());
 
-    var expectedRoles = testUser.getRoles().stream().map(UserRoleEntity::getRoles).map(r -> "ROLE_" + r).toList();
-    var actualRoles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
+    var expectedRoles = testUser.getRoles().stream().map(UserRoleEntity::getRoles).map(r -> "ROLE_" + r).collect(Collectors.toSet());
+    var actualRoles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
 
     Assertions.assertEquals(expectedRoles, actualRoles);
   }
@@ -80,5 +81,4 @@ class MovieBoxUserDetailsServiceTest {
         () -> toTest.loadUserByUsername(NOT_EXISTENT_EMAIL)
     );
   }
-
 }
