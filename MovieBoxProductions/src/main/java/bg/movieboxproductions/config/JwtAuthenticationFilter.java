@@ -37,31 +37,31 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         final String authHeader = request.getHeader("Authorization");
 
-        //Authorization: Bearer <token>
-        if (authHeader == null ||
-                authHeader.isBlank() ||
-                !authHeader.startsWith("Bearer ")
-        ) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
-        String jwt = authHeader.substring(7);
-//
-//        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-//            String token = authHeader.substring(7);
-//            if (jwtUtil.validateToken(token)) {
-//                // Set authentication in the context
-//                String username = jwtUtil.extractUsername(token);
-//                List<SimpleGrantedAuthority> authorities = jwtUtil.extractAuthorities(token);
-//
-//                Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
-//                SecurityContextHolder.getContext().setAuthentication(authentication);
-//            } else {
-//                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid JWT token");
-//                return;
-//            }
+//        //Authorization: Bearer <token>
+//        if (authHeader == null ||
+//                authHeader.isBlank() ||
+//                !authHeader.startsWith("Bearer ")
+//        ) {
+//            filterChain.doFilter(request, response);
+//            return;
 //        }
+//
+//        String jwt = authHeader.substring(7);
+
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            String token = authHeader.substring(7);
+            if (jwtUtil.validateToken(token)) {
+                // Set authentication in the context
+                String username = jwtUtil.extractUsername(token);
+                List<SimpleGrantedAuthority> authorities = jwtUtil.extractAuthorities(token);
+
+                Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            } else {
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid JWT token");
+                return;
+            }
+        }
 
         filterChain.doFilter(request, response);
     }
